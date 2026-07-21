@@ -1,0 +1,25 @@
+---
+interface Props {
+  /** Alternates the wave phase so consecutive dividers don't repeat. */
+  phase?: 'a' | 'b';
+}
+const { phase = 'a' } = Astro.props;
+
+// Phase A: valley at center (as in spec). Phase B: inverted.
+const path = phase === 'a'
+  ? 'M20,22 C70,4 120,40 170,22 C220,4 270,40 320,22'
+  : 'M20,22 C70,40 120,4 170,22 C220,40 270,4 320,22';
+
+// Gold dot y-position shifts with the wave
+const dotY = phase === 'a' ? 16 : 28;
+---
+
+<div class="divider" aria-hidden="true">
+  <svg viewBox="0 0 340 44">
+    <path d={path} fill="none" stroke="#1e4a1f" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="170" cy="22" r="7"   fill="#e0272d"/>
+    <circle cx="170" cy="22" r="2.4" fill="#7c0f12"/>
+    <circle cx="140" cy={dotY} r="5" fill="#f0b31c"/>
+    <circle cx="200" cy={dotY} r="5" fill="#f0b31c"/>
+  </svg>
+</div>

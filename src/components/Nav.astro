@@ -1,0 +1,69 @@
+---
+import FlowerMark from './FlowerMark.astro';
+import Burger from './Burger.astro';
+---
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">
+      <FlowerMark />
+      <span>Sonia</span>
+    </div>
+
+    <!-- Inline links: visible ≥1180px -->
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#craft">Craft</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <Burger />
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background: rgba(14,12,8,.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+
+  .nav-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nav-mark span {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-gold);
+    letter-spacing: .06em;
+  }
+
+  /* Hidden until 1180px where it replaces the burger */
+  .nav-links {
+    display: none;
+    gap: 28px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: .82rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  @media (min-width: 1180px) {
+    .nav-links { display: flex; }
+  }
+</style>

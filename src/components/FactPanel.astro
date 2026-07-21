@@ -1,0 +1,62 @@
+---
+// Fact panel: --lacquer-soft card, hairline border, inner crimson keyline
+// echoing the double-border convention of real Khokhloma lacquerware.
+interface Fact {
+  label: string;
+  value: string;
+}
+interface Props {
+  facts: Fact[];
+}
+const { facts } = Astro.props;
+---
+
+<aside class="fact-panel">
+  {facts.map(({ label, value }) => (
+    <div class="fact">
+      <b>{label}</b>
+      <span>{value}</span>
+    </div>
+  ))}
+</aside>
+
+<style>
+  .fact-panel {
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    padding: 26px 26px 22px;
+    position: relative;
+    background: var(--color-lacquer-soft);
+  }
+  /* Inner crimson keyline — painted double-border reference */
+  .fact-panel::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(224,39,45,.25);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .fact {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px dotted rgba(234,223,190,.15);
+    font-size: .95rem;
+  }
+  .fact:last-child { border-bottom: none; }
+
+  .fact b {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .fact span { text-align: right; }
+</style>

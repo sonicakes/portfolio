@@ -1,0 +1,107 @@
+---
+interface Props {
+  title: string;
+  kind: string;
+  description: string;
+  tags: string[];
+}
+const { title, kind, description, tags } = Astro.props;
+---
+
+<article class="card">
+  <!-- Three CSS-only berry dots: brand echo, zero assets -->
+  <div class="card-berries" aria-hidden="true">
+    <i></i><i></i><i></i>
+  </div>
+
+  <h3>{title}</h3>
+  <p class="kind">{kind}</p>
+  <p>{description}</p>
+
+  <div class="tags">
+    {tags.map(tag => <i>{tag}</i>)}
+  </div>
+</article>
+
+<style>
+  .card {
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-lacquer-soft);
+    padding: 26px 24px 22px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .3s, transform .3s;
+  }
+  .card:hover {
+    border-color: var(--color-gold);
+    transform: translateY(-3px);
+  }
+
+  .card-berries {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    gap: 5px;
+  }
+  .card-berries i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-crimson);
+    display: block;
+    position: relative;
+  }
+  .card-berries i::after {
+    content: "";
+    position: absolute;
+    inset: 2.5px;
+    border-radius: 50%;
+    background: var(--color-crimson-deep);
+  }
+
+  .card h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-gold);
+    font-size: 1.18rem;
+    letter-spacing: .04em;
+    margin-bottom: 4px;
+    padding-right: 44px; /* clear the berry dots */
+  }
+
+  .card .kind {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--color-crimson);
+    margin-bottom: 14px;
+  }
+
+  .card > p:not(.kind) {
+    font-size: .95rem;
+    color: var(--color-ink-cream);
+    flex: 1;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 18px;
+  }
+  /* Only green text on the site — signals "technology" as botanical layer */
+  .tags i {
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    letter-spacing: .05em;
+    color: var(--color-green-vine);
+    border: 1px solid rgba(63,109,42,.55);
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+</style>

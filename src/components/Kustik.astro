@@ -1,0 +1,140 @@
+---
+// Kustik: symmetric Khokhloma bush composition, recreated from the owner's hand-painted spoon.
+// Paint-order animation: vines → tendrils → leaves → rosette bloom → berries + rim dots.
+// Gotcha §6.1: outer <g transform="translate"> positions rosette; inner .rosette animates scale.
+// Gotcha §6.2: pathLength="1" normalises stroke-dasharray on draw paths.
+---
+
+<svg
+  class="kustik"
+  viewBox="0 0 760 400"
+  role="img"
+  aria-label="Khokhloma ornament: red rosette flower with vines and rowan berries"
+>
+  <defs>
+    <g id="berry">
+      <circle r="7.2" fill="#e0272d"/>
+      <circle r="2.6" fill="#7c0f12"/>
+    </g>
+    <g id="leafG">
+      <path d="M0,0 C10,-26 30,-40 52,-44 C46,-20 30,-2 6,4 Z" fill="#1e4a1f"/>
+      <path d="M14,-14 C24,-28 36,-36 48,-40" stroke="#3f6d2a" stroke-width="2" fill="none"/>
+    </g>
+    <path id="petal" d="M0,0 C-16,-24 -16,-56 0,-78 C16,-56 16,-24 0,0 Z"/>
+    <g id="cluster">
+      <use href="#berry" x="0"  y="0"/><use href="#berry" x="16" y="-6"/>
+      <use href="#berry" x="30" y="2"/><use href="#berry" x="8"  y="14"/>
+      <use href="#berry" x="24" y="16"/><use href="#berry" x="-8" y="10"/>
+      <use href="#berry" x="40" y="14"/><use href="#berry" x="14" y="30"/>
+      <use href="#berry" x="32" y="30"/><use href="#berry" x="-2" y="26"/>
+      <use href="#berry" x="46" y="28"/><use href="#berry" x="24" y="44"/>
+    </g>
+  </defs>
+
+  <!-- Main vine stems: draw from center outward, 1.8s -->
+  <g fill="none" stroke="#1e4a1f" stroke-width="6" stroke-linecap="round">
+    <path class="vine" pathLength="1"
+      d="M380,300 C300,320 230,300 180,250 C150,220 145,180 165,150"/>
+    <path class="vine" pathLength="1"
+      d="M380,300 C460,320 530,300 580,250 C610,220 615,180 595,150"/>
+  </g>
+
+  <!-- Fine tendrils: draw at 0.9s delay, 1.3s duration -->
+  <g fill="none" stroke="#3f6d2a" stroke-width="3" stroke-linecap="round">
+    <path class="vine fine" pathLength="1"
+      d="M215,285 C190,295 170,290 158,272 C150,260 152,246 162,240 C170,236 178,240 178,248 C178,254 172,257 168,254"/>
+    <path class="vine fine" pathLength="1"
+      d="M545,285 C570,295 590,290 602,272 C610,260 608,246 598,240 C590,236 582,240 582,248 C582,254 588,257 592,254"/>
+    <path class="vine fine" pathLength="1" d="M300,318 C280,336 254,340 234,330"/>
+    <path class="vine fine" pathLength="1" d="M460,318 C480,336 506,340 526,330"/>
+  </g>
+
+  <!-- Gold teardrop leaves: fade in at 1.5s -->
+  <g class="bloom" fill="#f0b31c">
+    <path d="M186,206 C170,178 172,148 190,126 C206,148 206,180 194,206 Z"
+      transform="rotate(-34 190 166)"/>
+    <path d="M566,206 C550,178 552,148 570,126 C586,148 586,180 574,206 Z"
+      transform="rotate(34 570 166)"/>
+  </g>
+
+  <!-- Green leaves: fade in at 1.5s -->
+  <use class="bloom" href="#leafG" transform="translate(268,268) rotate(-18)"/>
+  <use class="bloom" href="#leafG" transform="translate(492,268) rotate(-162) scale(1,-1)"/>
+
+  <!-- 12-berry rowan clusters: fade in at 2s (late) -->
+  <use class="bloom late" href="#cluster" transform="translate(150,232)"/>
+  <use class="bloom late" href="#cluster" transform="translate(566,232) scale(-1,1)"/>
+
+  <!-- Rosette: outer g=position, inner g=animated scale (.45→1, springy) -->
+  <g transform="translate(380,170)">
+    <g class="rosette">
+      <g fill="#e0272d" stroke="#0e0c08" stroke-width="1.6">
+        <use href="#petal" transform="rotate(0)"/>
+        <use href="#petal" transform="rotate(45)"/>
+        <use href="#petal" transform="rotate(90)"/>
+        <use href="#petal" transform="rotate(135)"/>
+        <use href="#petal" transform="rotate(180)"/>
+        <use href="#petal" transform="rotate(225)"/>
+        <use href="#petal" transform="rotate(270)"/>
+        <use href="#petal" transform="rotate(315)"/>
+      </g>
+      <!-- Petal veins: black hairlines -->
+      <g stroke="#0e0c08" stroke-width="1.1" opacity=".85">
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(0)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(45)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(90)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(135)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(225)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(270)"/>
+        <line x1="0" y1="0" x2="0" y2="-70" transform="rotate(315)"/>
+      </g>
+      <circle r="16" fill="#f0b31c" stroke="#c98f0d" stroke-width="2"/>
+      <circle r="5"  fill="#c98f0d"/>
+    </g>
+  </g>
+
+  <!-- Scattered gold rim dots: fade in at 2s (late) -->
+  <g class="bloom late" fill="#f0b31c">
+    <circle cx="316" cy="60"  r="6"/>
+    <circle cx="380" cy="42"  r="7"/>
+    <circle cx="444" cy="60"  r="6"/>
+    <circle cx="90"  cy="150" r="5"/>
+    <circle cx="670" cy="150" r="5"/>
+  </g>
+</svg>
+
+<style>
+  .kustik {
+    width: min(560px, 92vw);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* Paint-order sequence — see §3.4 */
+  .kustik .vine {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.8s ease-out forwards .2s;
+  }
+  .kustik .vine.fine {
+    animation-delay: .9s;
+    animation-duration: 1.3s;
+  }
+  .kustik .bloom {
+    opacity: 0;
+    animation: bloom .9s ease forwards 1.5s;
+  }
+  .kustik .bloom.late {
+    animation-delay: 2s;
+  }
+  /* Outer g positions; this inner g springs into view */
+  .kustik .rosette {
+    transform-box: fill-box;
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(.45);
+    animation: rosette .8s cubic-bezier(.3,1.4,.5,1) forwards 1.8s;
+  }
+</style>

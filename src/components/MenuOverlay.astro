@@ -1,0 +1,125 @@
+---
+// Full-screen menu overlay: vine draws itself on open, links stagger rise-in.
+// Russian sublabels with lang="ru" per §2.2 bilingual rule.
+// Escape closes; scroll locked while open; all ARIA on burger handled here.
+---
+
+<div class="menu-overlay" id="menu" role="dialog" aria-label="Site menu">
+
+  <!-- Left-edge vine: draws top-to-bottom on each open -->
+  <svg class="menu-vine" viewBox="0 0 60 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path class="mv" pathLength="1"
+      d="M30,-10 C10,90 50,170 30,270 C10,370 50,450 30,550 C10,650 50,730 30,820"
+      fill="none" stroke="#1e4a1f" stroke-width="4" stroke-linecap="round"/>
+    <path class="mv" pathLength="1"
+      d="M30,180 C44,172 54,178 54,190 C54,199 46,202 42,197"
+      fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+    <path class="mv" pathLength="1"
+      d="M30,470 C16,462 6,468 6,480 C6,489 14,492 18,487"
+      fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+    <g class="mv-berry" fill="#e0272d">
+      <circle cx="18" cy="320" r="6"/>
+      <circle cx="30" cy="330" r="6"/>
+      <circle cx="20" cy="340" r="6"/>
+      <circle cx="42" cy="610" r="6"/>
+      <circle cx="32" cy="622" r="6"/>
+      <circle cx="44" cy="632" r="6"/>
+    </g>
+    <g class="mv-berry" fill="#f0b31c">
+      <circle cx="42" cy="100" r="4"/>
+      <circle cx="16" cy="700" r="4"/>
+    </g>
+  </svg>
+
+  <ul class="menu-list">
+    <li><a href="#about">About<span class="ru" lang="ru">О себе</span></a></li>
+    <li><a href="#work">Work<span class="ru" lang="ru">Работы</span></a></li>
+    <li><a href="#craft">Craft<span class="ru" lang="ru">Ремесло</span></a></li>
+    <li><a href="#contact">Contact<span class="ru" lang="ru">Связь</span></a></li>
+  </ul>
+</div>
+
+<script>
+  const burger  = document.querySelector<HTMLButtonElement>('.burger')!;
+  const overlay = document.getElementById('menu')!;
+
+  function setMenu(open: boolean) {
+    overlay.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  burger.addEventListener('click', () => setMenu(!overlay.classList.contains('open')));
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+</script>
+
+<style>
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 110;
+    background: rgba(14,12,8,.97);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+  }
+  .menu-overlay.open { opacity: 1; pointer-events: auto; }
+
+  /* Vine container: left-edge, full height */
+  .menu-vine {
+    position: absolute;
+    left: clamp(14px, 6vw, 80px);
+    top: 0;
+    height: 100%;
+    width: 60px;
+  }
+
+  /* Vine paths draw on open; reset when .open drops (dashoffset returns to 1 instantly) */
+  .menu-overlay.open .menu-vine .mv {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1.4s ease-out forwards .1s;
+  }
+  .menu-overlay.open .menu-vine .mv-berry {
+    opacity: 0;
+    animation: bloom .5s ease forwards 1.2s;
+  }
+
+  /* Nav links: staggered rise-in */
+  .menu-list { list-style: none; text-align: center; }
+  .menu-list li { opacity: 0; transform: translateY(14px); }
+  .menu-overlay.open .menu-list li {
+    animation: riseIn .55s ease forwards;
+  }
+  .menu-overlay.open .menu-list li:nth-child(1) { animation-delay: .25s; }
+  .menu-overlay.open .menu-list li:nth-child(2) { animation-delay: .4s; }
+  .menu-overlay.open .menu-list li:nth-child(3) { animation-delay: .55s; }
+  .menu-overlay.open .menu-list li:nth-child(4) { animation-delay: .7s; }
+
+  .menu-list a {
+    display: inline-block;
+    padding: 14px 10px;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    color: var(--color-gold);
+    letter-spacing: .05em;
+  }
+  .menu-list a:hover { color: var(--color-crimson); }
+
+  /* Russian sublabels */
+  .menu-list .ru {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+    margin-top: -4px;
+  }
+  .menu-list a:hover .ru { color: var(--color-crimson); }
+</style>

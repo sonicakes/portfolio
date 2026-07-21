@@ -1,0 +1,157 @@
+---
+// Scroll-linked side vine columns — visible ≥820px.
+// Layers: dashed guide (no pathLength, §6.3), solid stem (JS strokeDashoffset),
+// tendrils (CSS transition, .on when scroll passes data-at),
+// berries (springy scale, .on when scroll passes data-at).
+// All reversible — scrolling up retracts the vine.
+---
+
+<!-- Left vine -->
+<svg class="side-vine left" viewBox="0 0 56 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <!-- Dashed guide: no pathLength — stroke-dasharray is in user units (§6.3) -->
+  <path class="base"
+    d="M28,-10 C10,90 46,170 28,270 C10,370 46,450 28,550 C10,650 46,730 28,820"
+    fill="none" stroke="#3f6d2a" stroke-width="1.4" stroke-linecap="round"/>
+  <!-- Solid stem: pathLength="1" so JS can set dashoffset as 0–1 fraction -->
+  <path class="stem" pathLength="1"
+    d="M28,-10 C10,90 46,170 28,270 C10,370 46,450 28,550 C10,650 46,730 28,820"
+    fill="none" stroke="#1e4a1f" stroke-width="4" stroke-linecap="round"/>
+  <!-- Tendrils sprout when scroll passes their depth -->
+  <path class="tw" data-at="0.2"  pathLength="1"
+    d="M28,150 C42,142 52,148 52,160 C52,169 44,172 40,167"
+    fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tw" data-at="0.45" pathLength="1"
+    d="M28,430 C14,422 4,428 4,440 C4,449 12,452 16,447"
+    fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="tw" data-at="0.78" pathLength="1"
+    d="M28,690 C42,682 52,688 52,700 C52,709 44,712 40,707"
+    fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Berry clusters pop with springy scale -->
+  <g class="svb" data-at="0.3"  fill="#e0272d">
+    <circle cx="16" cy="290" r="5.5"/>
+    <circle cx="28" cy="300" r="5.5"/>
+    <circle cx="18" cy="310" r="5.5"/>
+  </g>
+  <g class="svb" data-at="0.55" fill="#f0b31c">
+    <circle cx="40" cy="490" r="4"/>
+  </g>
+  <g class="svb" data-at="0.75" fill="#e0272d">
+    <circle cx="40" cy="580" r="5.5"/>
+    <circle cx="30" cy="592" r="5.5"/>
+    <circle cx="42" cy="602" r="5.5"/>
+  </g>
+  <g class="svb" data-at="0.95" fill="#f0b31c">
+    <circle cx="14" cy="760" r="4"/>
+  </g>
+</svg>
+
+<!-- Right vine: mirrored via transform -->
+<svg class="side-vine right" viewBox="0 0 56 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g transform="translate(56,0) scale(-1,1)">
+    <path class="base"
+      d="M28,-10 C10,90 46,170 28,270 C10,370 46,450 28,550 C10,650 46,730 28,820"
+      fill="none" stroke="#3f6d2a" stroke-width="1.4" stroke-linecap="round"/>
+    <path class="stem" pathLength="1"
+      d="M28,-10 C10,90 46,170 28,270 C10,370 46,450 28,550 C10,650 46,730 28,820"
+      fill="none" stroke="#1e4a1f" stroke-width="4" stroke-linecap="round"/>
+    <path class="tw" data-at="0.2"  pathLength="1"
+      d="M28,150 C42,142 52,148 52,160 C52,169 44,172 40,167"
+      fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+    <path class="tw" data-at="0.45" pathLength="1"
+      d="M28,430 C14,422 4,428 4,440 C4,449 12,452 16,447"
+      fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+    <path class="tw" data-at="0.78" pathLength="1"
+      d="M28,690 C42,682 52,688 52,700 C52,709 44,712 40,707"
+      fill="none" stroke="#3f6d2a" stroke-width="2.5" stroke-linecap="round"/>
+    <g class="svb" data-at="0.3"  fill="#e0272d">
+      <circle cx="16" cy="290" r="5.5"/>
+      <circle cx="28" cy="300" r="5.5"/>
+      <circle cx="18" cy="310" r="5.5"/>
+    </g>
+    <g class="svb" data-at="0.55" fill="#f0b31c">
+      <circle cx="40" cy="490" r="4"/>
+    </g>
+    <g class="svb" data-at="0.75" fill="#e0272d">
+      <circle cx="40" cy="580" r="5.5"/>
+      <circle cx="30" cy="592" r="5.5"/>
+      <circle cx="42" cy="602" r="5.5"/>
+    </g>
+    <g class="svb" data-at="0.95" fill="#f0b31c">
+      <circle cx="14" cy="760" r="4"/>
+    </g>
+  </g>
+</svg>
+
+<script>
+  const stems    = document.querySelectorAll<SVGPathElement>('.side-vine .stem');
+  const growers  = document.querySelectorAll<SVGElement>('.side-vine [data-at]');
+  const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function drawVines() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const raw = max > 0 ? Math.min(1, window.scrollY / max) : 1;
+    const p   = 0.06 + 0.94 * raw; // 6% seed sprout visible before scrolling
+    stems.forEach(el => { el.style.strokeDashoffset = String(1 - p); });
+    growers.forEach(el => {
+      el.classList.toggle('on', p >= parseFloat((el as HTMLElement).dataset.at ?? '1'));
+    });
+  }
+
+  if (reduced) {
+    stems.forEach(el => { el.style.strokeDashoffset = '0'; });
+    growers.forEach(el => el.classList.add('on'));
+  } else {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { drawVines(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', drawVines);
+    drawVines();
+  }
+</script>
+
+<style>
+  .side-vine {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 44px;
+    z-index: 5;
+    pointer-events: none;
+    display: none;
+  }
+  .side-vine.left  { left: 5px; }
+  .side-vine.right { right: 5px; }
+
+  @media (min-width: 820px) { .side-vine { display: block; } }
+
+  /* Dashed underdrawing — always visible, signals "scroll for more" */
+  .side-vine .base {
+    opacity: .32;
+    stroke-dasharray: 4 9;
+  }
+
+  /* Stem initial state: fully offset (invisible). JS overrides per scroll. */
+  .side-vine .stem { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+  /* Tendrils: CSS-transitioned, toggled by .on */
+  .side-vine .tw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset .9s ease-out;
+  }
+  .side-vine .tw.on { stroke-dashoffset: 0; }
+
+  /* Berries: springy scale pop */
+  .side-vine .svb {
+    opacity: 0;
+    transform: scale(.35);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity .45s ease, transform .6s cubic-bezier(.3,1.5,.5,1);
+  }
+  .side-vine .svb.on { opacity: 1; transform: scale(1); }
+</style>

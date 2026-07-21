@@ -1,0 +1,88 @@
+---
+// Burger button: three gold bars + one crimson rowan berry on the middle bar.
+// Open state: bars fold to crimson ✕; berry translates to center and scales 1.5×.
+// aria-expanded and aria-label toggled by MenuOverlay's script.
+---
+
+<button
+  class="burger"
+  aria-expanded="false"
+  aria-controls="menu"
+  aria-label="Open menu"
+>
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="berry"></span>
+</button>
+
+<style>
+  .burger {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 120;
+    transition: border-color .3s;
+  }
+  .burger:hover { border-color: var(--color-gold); }
+
+  .burger .bar {
+    position: absolute;
+    left: 13px;
+    width: 22px;
+    height: 2.4px;
+    border-radius: 2px;
+    background: var(--color-gold);
+    transition:
+      transform .38s cubic-bezier(.6,.05,.2,1.2),
+      opacity   .25s,
+      background .3s;
+  }
+  .burger .bar:nth-child(1) { top: 16px; }
+  .burger .bar:nth-child(2) { top: 22.5px; }
+  .burger .bar:nth-child(3) { top: 29px; }
+
+  .burger .berry {
+    position: absolute;
+    top: 20.5px;
+    right: 10px;
+    width: 6.5px;
+    height: 6.5px;
+    border-radius: 50%;
+    background: var(--color-crimson);
+    transition: transform .38s cubic-bezier(.6,.05,.2,1.2);
+  }
+  .burger .berry::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: var(--color-crimson-deep);
+  }
+
+  /* Open state */
+  .burger[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+    background: var(--color-crimson);
+  }
+  .burger[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(.2);
+  }
+  .burger[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+    background: var(--color-crimson);
+  }
+  .burger[aria-expanded="true"] .berry {
+    transform: translate(-10.5px, 1.5px) scale(1.5);
+  }
+
+  /* Hidden at ≥1180px where inline nav takes over */
+  @media (min-width: 1180px) {
+    .burger { display: none !important; }
+  }
+</style>

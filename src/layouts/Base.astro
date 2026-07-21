@@ -1,0 +1,57 @@
+---
+import Nav from '../components/Nav.astro';
+import MenuOverlay from '../components/MenuOverlay.astro';
+import SideVines from '../components/SideVines.astro';
+import '../styles/theme.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title       = 'Sonia — Developer · Khokhloma Portfolio',
+  description = 'Front-end & full-stack developer. TypeScript, Vue, React, C#. Portfolio painted in the black lacquer, crimson and gold of Khokhloma folk art.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content={description}/>
+  <title>{title}</title>
+
+  <!-- Google Fonts: Ruslan Display (display), PT Sans (body), PT Mono (utility) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Ruslan+Display&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <SideVines />
+  <Nav />
+  <MenuOverlay />
+
+  <slot />
+
+  <footer>
+    <span lang="ru">Расписано вручную</span> · Hand-painted in Sydney ·
+    Ornament after the artist's own Khokhloma spoon · © 2026 Sonia
+  </footer>
+</body>
+</html>
+
+<style>
+  footer {
+    text-align: center;
+    padding: 34px 24px 42px;
+    color: var(--color-ink-dim);
+    font-family: var(--font-mono);
+    font-size: .75rem;
+    letter-spacing: .12em;
+    border-top: 1px solid var(--color-hairline);
+  }
+</style>
