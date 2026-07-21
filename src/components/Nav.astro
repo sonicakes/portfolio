@@ -7,7 +7,10 @@ import Burger from './Burger.astro';
   <div class="nav-inner">
     <div class="nav-mark">
       <FlowerMark />
-      <span>Sonia</span>
+      <div class="nav-name">
+        <span class="nav-first">Sonia</span>
+        <span class="nav-last">Parker</span>
+      </div>
     </div>
 
     <!-- Inline links: visible ≥1180px -->
@@ -15,6 +18,7 @@ import Burger from './Burger.astro';
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="#craft">Craft</a>
+      <a href="#story">Story</a>
       <a href="#contact">Contact</a>
     </div>
 
@@ -46,11 +50,23 @@ import Burger from './Burger.astro';
     align-items: center;
     gap: 12px;
   }
-  .nav-mark span {
+  .nav-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .nav-first {
     font-family: var(--font-display);
     font-size: 1.25rem;
     color: var(--color-gold);
     letter-spacing: .06em;
+  }
+  .nav-last {
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    color: var(--color-ink-dim);
+    letter-spacing: .18em;
+    text-transform: uppercase;
   }
 
   /* Hidden until 1180px where it replaces the burger */

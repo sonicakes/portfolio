@@ -101,15 +101,22 @@
     <circle cx="444" cy="60"  r="6"/>
     <circle cx="90"  cy="150" r="5"/>
     <circle cx="670" cy="150" r="5"/>
+    <!-- Bottom mirror of top 3 dots, arcing downward -->
+    <circle cx="316" cy="340" r="6"/>
+    <circle cx="380" cy="358" r="7"/>
+    <circle cx="444" cy="340" r="6"/>
   </g>
 </svg>
 
 <style>
   .kustik {
-    width: min(560px, 92vw);
+    width: min(600px, 92vw);
     height: auto;
     display: block;
     margin: 0 auto;
+  }
+  @media (max-width: 640px) {
+    .kustik { width: 100%; }
   }
 
   /* Paint-order sequence — see §3.4 */

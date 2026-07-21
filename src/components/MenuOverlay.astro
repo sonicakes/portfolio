@@ -31,10 +31,16 @@
     </g>
   </svg>
 
+  <button class="menu-close" aria-label="Close menu">
+    <span class="mc-bar"></span>
+    <span class="mc-bar"></span>
+  </button>
+
   <ul class="menu-list">
     <li><a href="#about">About<span class="ru" lang="ru">О себе</span></a></li>
     <li><a href="#work">Work<span class="ru" lang="ru">Работы</span></a></li>
     <li><a href="#craft">Craft<span class="ru" lang="ru">Ремесло</span></a></li>
+    <li><a href="#story">Story<span class="ru" lang="ru">История</span></a></li>
     <li><a href="#contact">Contact<span class="ru" lang="ru">Связь</span></a></li>
   </ul>
 </div>
@@ -51,6 +57,8 @@
   }
 
   burger.addEventListener('click', () => setMenu(!overlay.classList.contains('open')));
+  const closeBtn = overlay.querySelector<HTMLButtonElement>('.menu-close')!;
+  closeBtn.addEventListener('click', () => setMenu(false));
   overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 </script>
@@ -69,6 +77,33 @@
     transition: opacity .4s ease;
   }
   .menu-overlay.open { opacity: 1; pointer-events: auto; }
+
+  /* Close button: top-right, crimson ✕ */
+  .menu-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: 1px solid rgba(224,39,45,.35);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color .3s;
+  }
+  .menu-close:hover { border-color: var(--color-crimson); }
+  .mc-bar {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-crimson);
+  }
+  .mc-bar:nth-child(1) { transform: rotate(45deg); }
+  .mc-bar:nth-child(2) { transform: rotate(-45deg); }
 
   /* Vine container: left-edge, full height */
   .menu-vine {
@@ -97,9 +132,10 @@
     animation: riseIn .55s ease forwards;
   }
   .menu-overlay.open .menu-list li:nth-child(1) { animation-delay: .25s; }
-  .menu-overlay.open .menu-list li:nth-child(2) { animation-delay: .4s; }
-  .menu-overlay.open .menu-list li:nth-child(3) { animation-delay: .55s; }
-  .menu-overlay.open .menu-list li:nth-child(4) { animation-delay: .7s; }
+  .menu-overlay.open .menu-list li:nth-child(2) { animation-delay: .38s; }
+  .menu-overlay.open .menu-list li:nth-child(3) { animation-delay: .51s; }
+  .menu-overlay.open .menu-list li:nth-child(4) { animation-delay: .64s; }
+  .menu-overlay.open .menu-list li:nth-child(5) { animation-delay: .77s; }
 
   .menu-list a {
     display: inline-block;

@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Kustik from '../components/Kustik.astro';
+import Spoons from '../components/Spoons.astro';
+import ChipFlower from '../components/ChipFlower.astro';
+import ChipBerry from '../components/ChipBerry.astro';
 import Divider from '../components/Divider.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import FactPanel from '../components/FactPanel.astro';
@@ -32,9 +35,10 @@ const projects = [
 
 const facts = [
   { label: 'Base',       value: 'Sydney, Australia' },
+  { label: 'Origins',    value: 'Russian-born, Australian-made.' },
   { label: 'Experience', value: '6+ years professional' },
   { label: 'Cloud',      value: 'Azure certified (AZ-104)' },
-  { label: 'Languages',  value: 'Russian · English · French · Spanish · Thai' },
+  { label: 'Languages',  value: 'Russian · English · French · Spanish' },
   { label: 'Off-duty',   value: 'Film criticism, folk art, one Labrador' },
 ];
 
@@ -78,15 +82,86 @@ const craftColumns = [
   <header>
     <Kustik />
     <h1>Sonia</h1>
-    <p class="hero-cyrillic" lang="ru">Соня</p>
-    <p class="hero-role">Front-end &amp; Full-stack Developer</p>
-    <p class="hero-line">
-      Six-plus years building for the web — TypeScript, Vue, React and C# —
-      painted here in the black lacquer, crimson and gold of Khokhloma,
-      the folk art I grew up with and still make by hand.
-    </p>
-    <a class="hero-cta" href="#work">See the work</a>
+    <p class="hero-surname">Parker</p>
+
+    <!-- Vine arrows: branch from name down to each role card -->
+    <svg class="role-vines" viewBox="0 0 580 88" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+      <!-- Left stem → Digital Designer -->
+      <path class="rv-stem rv-stem--l" pathLength="1"
+        d="M290,2 C270,18 230,30 185,46 C155,57 120,64 92,74"
+        fill="none" stroke="rgba(30,74,31,.38)" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Centre stem → Front-End Dev -->
+      <path class="rv-stem rv-stem--c" pathLength="1"
+        d="M290,2 C294,22 286,48 290,74"
+        fill="none" stroke="rgba(30,74,31,.38)" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Right stem → Content Creator -->
+      <path class="rv-stem rv-stem--r" pathLength="1"
+        d="M290,2 C310,18 350,30 395,46 C425,57 460,64 488,74"
+        fill="none" stroke="rgba(30,74,31,.38)" stroke-width="2.8" stroke-linecap="round"/>
+      <!-- Curling side tendrils -->
+      <path class="rv-tendril" pathLength="1"
+        d="M185,46 C178,36 166,34 163,42 C161,48 167,53 174,49"
+        fill="none" stroke="rgba(63,109,42,.3)" stroke-width="1.8" stroke-linecap="round"/>
+      <path class="rv-tendril" pathLength="1"
+        d="M395,46 C402,36 414,34 417,42 C419,48 413,53 406,49"
+        fill="none" stroke="rgba(63,109,42,.3)" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Berry tips at card entrances -->
+      <g class="rv-berry">
+        <circle cx="92"  cy="76" r="5.5" fill="#e0272d"/><circle cx="92"  cy="76" r="2" fill="#7c0f12"/>
+        <circle cx="290" cy="76" r="5.5" fill="#e0272d"/><circle cx="290" cy="76" r="2" fill="#7c0f12"/>
+        <circle cx="488" cy="76" r="5.5" fill="#e0272d"/><circle cx="488" cy="76" r="2" fill="#7c0f12"/>
+      </g>
+    </svg>
+
+    <div class="hero-roles">
+      <div class="role-chip">
+        <div class="chip-inner">
+          <div class="chip-front">
+            <ChipFlower />
+            <span>Digital Designer</span>
+            <span class="chip-tap" aria-hidden="true">Tap to reveal</span>
+          </div>
+          <div class="chip-back">
+            <span class="cb-title">Digital Designer</span>
+            <p class="cb-skills">UI/UX · Design systems<br/>Figma → production code</p>
+            <a href="#work" class="cb-cta">See design work</a>
+          </div>
+        </div>
+      </div>
+      <div class="role-chip">
+        <div class="chip-inner">
+          <div class="chip-front">
+            <Spoons />
+            <span>Front-End Dev</span>
+            <span class="chip-tap" aria-hidden="true">Tap to reveal</span>
+          </div>
+          <div class="chip-back">
+            <span class="cb-title">Front-End Dev</span>
+            <p class="cb-skills">Vue · React · TypeScript<br/>Tailwind · design tokens</p>
+            <a href="#work" class="cb-cta">See dev projects</a>
+          </div>
+        </div>
+      </div>
+      <div class="role-chip">
+        <div class="chip-inner">
+          <div class="chip-front">
+            <ChipBerry />
+            <span>Content Creator</span>
+            <span class="chip-tap" aria-hidden="true">Tap to reveal</span>
+          </div>
+          <div class="chip-back">
+            <span class="cb-title">Content Creator</span>
+            <p class="cb-skills">Film criticism · Podcast<br/>Editorial · Production</p>
+            <a href="#work" class="cb-cta">See content work</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <a class="hero-cta" href="#work">See all work</a>
   </header>
+  <!-- Spoon handle: flow element between bowl and divider -->
+  <div class="hero-handle" aria-hidden="true"></div>
 
   <Divider phase="a" />
 
@@ -97,12 +172,16 @@ const craftColumns = [
     <div class="about-grid">
       <div>
         <p>
-          I'm a developer based in Sydney who treats interfaces the way Khokhloma
+          <img src="/avatar.jpg" alt="Sonia Parker" class="avatar" />
+          <span>привет! (Privet! - Hello!) </span>I'm a Russian-Australian Designer, Developer & Content Creator based around Sydney, Australia.
+    
+           I treat interfaces the way Khokhloma
           masters treat wood: start with a dark, quiet ground, then apply ornament
-          only where it earns its place. Most of my work lives in the JavaScript
-          world — Vue and React on the front, Node and C# behind it — with a soft
-          spot for design systems, strict tokens, and typography that carries a
-          point of view.
+          only where it earns its place. Most of my work lives at the front-end —
+          Vue and React, but also the design decisions underneath: type scales,
+          spacing systems, interaction states. What I find most interesting is the
+          distance between a design file and a finished interface, and how much
+          craft it takes to close it faithfully.
         </p>
         <p>
           Outside client work I run an independent production label where I build
@@ -156,6 +235,68 @@ const craftColumns = [
     </div>
   </section>
 
+  <Divider phase="b" />
+
+  <!-- ── Story ─────────────────────────────────────────────────────────── -->
+  <section id="story" class="wrap rise">
+    <h2>Khokhloma</h2>
+    <p class="sub">Folk art, rendered in code</p>
+    <div class="story-grid">
+      <div class="story-prose">
+        <p>
+          Khokhloma is a Russian folk painting tradition from the 17th century, originating
+          in the forests of the Nizhny Novgorod region. Craftspeople decorated turned wooden
+          objects — bowls, ladles, spoons — with a black lacquer ground, then applied
+          ornament in red, gold, and green before firing in a kiln. Heat transformed silver
+          tin powder into gold, producing the characteristic warm gleam of genuine Khokhloma
+          lacquerware. The four colours — black, crimson, gold, green — have not changed
+          in three centuries.
+        </p>
+        <p>
+          The style used here is Kudrina — a variation built on movement rather than
+          pattern. Where standard Khokhloma fills the ground with isolated berries and
+          leaves, Kudrina composes a <em>kustik</em> (little bush): a central rosette
+          anchoring spiralling vine tendrils, with rowan clusters appearing where the
+          stems branch. It is a style with a strict painting order — vine framework first,
+          then leaves, then the rosette, then the berries last. The SVG animation in the
+          hero follows that exact sequence.
+        </p>
+        <p>
+          The ornament on this site is drawn directly from a spoon I painted by hand.
+          Every hex value in the colour system is sampled from that physical piece:
+          the lacquer ground, the rosette crimson, the leaf gold, the vine green.
+          The kustik SVG in the hero mirrors its composition — same stem geometry,
+          same teardrop leaves, same twelve-berry clusters, same five rim dots.
+          Building the site was, in a sense, painting the spoon again — this time
+          in a text editor.
+        </p>
+      </div>
+
+      <!-- Spoon figure: replace src with photo/scan when available (§8 open item) -->
+      <figure class="spoon-fig">
+        <div class="spoon-placeholder" aria-hidden="true">
+          <svg viewBox="0 0 120 200" width="80" opacity=".4">
+            <ellipse cx="60" cy="42" rx="28" ry="32" fill="#0e0c08" stroke="#f0b31c" stroke-width="1.5"/>
+            <g fill="#e0272d">
+              <circle cx="60"   cy="30" r="5.5"/>
+              <circle cx="70"   cy="37" r="5.5"/>
+              <circle cx="70"   cy="49" r="5.5"/>
+              <circle cx="60"   cy="56" r="5.5"/>
+              <circle cx="50"   cy="49" r="5.5"/>
+              <circle cx="50"   cy="37" r="5.5"/>
+            </g>
+            <circle cx="60" cy="43" r="5.2" fill="#f0b31c"/>
+            <rect x="57" y="74" width="6" height="100" rx="3" fill="#0e0c08" stroke="#f0b31c" stroke-width="1"/>
+          </svg>
+        </div>
+        <figcaption>
+          The hand-painted Khokhloma spoon this site's ornament is based on.
+          <span class="fig-note">Photo coming soon.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- ── Contact (golden inversion) ────────────────────────────────────── -->
   <ContactPanel />
 
@@ -175,15 +316,82 @@ const craftColumns = [
     { threshold: 0.12 }
   );
   document.querySelectorAll('.rise').forEach(el => io.observe(el));
+
+  // Flip cards: tap to toggle on touch devices
+  document.querySelectorAll('.role-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('flipped');
+    });
+  });
 </script>
 
 <style>
   /* ── Hero ─────────────────────────────────────────────────────────────── */
   header {
     text-align: center;
-    padding: 56px 24px 30px;
-    overflow: hidden;
+    padding: 0 48px 44px;
+    position: relative;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 38%,
+        rgba(240,179,28,.04) 0%,
+        rgba(200,120,12,.02) 40%,
+        transparent          70%),
+      radial-gradient(ellipse 40% 30% at 50% 22%,
+        rgba(240,179,28,.03) 0%,
+        transparent          100%);
   }
+
+  /* Oval spoon-bowl frame: narrow, centered, taller than wide */
+  .hero-frame {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(420px, calc(100% - 48px));
+    border: 1px solid rgba(240,179,28,.12);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(
+      ellipse at 50% 50%,
+      rgba(8,10,20,.0)  0%,
+      rgba(8,10,20,.72) 60%,
+      rgba(6,8,18,.88)  100%
+    );
+    box-shadow:
+      0 0 0 1px rgba(240,179,28,.06),
+      0 20px 56px rgba(0,0,0,.55),
+      0 6px 20px rgba(0,0,0,.35),
+      inset 0 2px 4px rgba(240,179,28,.08),
+      inset 0 -2px 6px rgba(0,0,0,.4);
+  }
+  /* Inner crimson ring — double-border lacquerware convention */
+  .hero-frame::after {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    border: 1px solid rgba(224,39,45,.22);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.25);
+  }
+
+  /* Spoon handle: sits between hero bottom and divider, visually anchors the oval bowl */
+  .hero-handle {
+    width: 6px;
+    height: 36px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, rgba(240,179,28,.55), rgba(240,179,28,.22));
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.4), 0 2px 6px rgba(0,0,0,.3);
+  }
+
+  /* Cardinal-point accents sit on the oval border line */
+  .hf-dot { position: absolute; }
+  .hf-dot.top    { top: -7px;  left: 50%; transform: translateX(-50%); }
+  .hf-dot.bottom { bottom: -7px; left: 50%; transform: translateX(-50%); }
+  .hf-dot.left   { left: -5px; top: 50%; transform: translateY(-50%); }
+  .hf-dot.right  { right: -5px; top: 50%; transform: translateY(-50%); }
 
   h1 {
     font-family: var(--font-display);
@@ -191,26 +399,184 @@ const craftColumns = [
     font-size: clamp(2.6rem, 7vw, 4.4rem);
     color: var(--color-gold);
     letter-spacing: .05em;
-    margin-top: 18px;
+    line-height: 1.05;
     text-shadow: 0 0 26px rgba(240,179,28,.22);
   }
 
-  .hero-cyrillic {
+  .hero-surname {
     font-family: var(--font-display);
-    color: var(--color-crimson);
-    font-size: clamp(1.15rem, 3vw, 1.6rem);
-    letter-spacing: .42em;
-    text-indent: .42em;
-    margin-top: 6px;
+    font-size: clamp(1.1rem, 2.8vw, 1.55rem);
+    color: var(--color-ink-dim);
+    letter-spacing: .08em;
+    margin-top: -6px;
   }
 
-  .hero-role {
+  /* Vine arrows from name → cards */
+  .role-vines {
+    display: block;
+    width: min(600px, 100%);
+    height: 88px;
+    margin: 6px auto 0;
+    overflow: visible;
+  }
+  .rv-stem {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1s ease-out forwards;
+  }
+  .rv-stem--l { animation-delay: .6s; }
+  .rv-stem--c { animation-delay: .6s; }
+  .rv-stem--r { animation-delay: .6s; }
+  .rv-tendril {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw .6s ease-out forwards 1.4s;
+  }
+  /* Mobile: cards stack, only show the centre stem */
+  @media (max-width: 620px) {
+    .rv-stem--l, .rv-stem--r,
+    .rv-tendril { display: none; }
+    .rv-berry circle:nth-child(1),
+    .rv-berry circle:nth-child(2),
+    .rv-berry circle:nth-child(5),
+    .rv-berry circle:nth-child(6) { display: none; }
+  }
+  .rv-berry {
+    opacity: 0;
+    animation: bloom .4s ease forwards 1.7s;
+  }
+
+  /* Role chips: full-width row, cards share available space equally */
+  .hero-roles {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  /* ── Flip cards ─────────────────────────────────────────────────────── */
+  .role-chip {
+    perspective: 900px;
+    flex: 1 1 0;
+    min-width: 140px;
+    max-width: 240px;
+    height: 240px;
+    cursor: pointer;
+  }
+
+  .chip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .55s cubic-bezier(.4,0,.2,1);
+  }
+  .role-chip:hover .chip-inner,
+  .role-chip.flipped .chip-inner {
+    transform: rotateY(180deg);
+  }
+
+  .chip-front,
+  .chip-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 20px 18px;
+  }
+
+  /* Front: dark lacquer with gold keyline */
+  .chip-front {
+    background: var(--color-lacquer-soft);
+  }
+  .chip-front::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgba(240,179,28,.14);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .chip-front span {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    letter-spacing: .05em;
+    color: var(--color-gold);
+  }
+  .chip-front :global(.spoons),
+  .chip-front :global(.chip-icon) {
+    height: 88px;
+    width: auto;
+  }
+
+  /* Back: gold gradient — same as contact panel */
+  .chip-back {
+    background: linear-gradient(165deg, #f4bc27 0%, #e8a70f 55%, #cf920c 100%);
+    transform: rotateY(180deg);
+    gap: 8px;
+  }
+  .chip-back::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1.5px solid rgba(14,12,8,.4);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .cb-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    color: var(--color-lacquer);
+    letter-spacing: .05em;
+  }
+  .cb-skills {
     font-family: var(--font-mono);
-    color: var(--color-ink-dim);
-    letter-spacing: .28em;
+    font-size: .72rem;
+    letter-spacing: .06em;
+    color: #4d3c08;
+    line-height: 1.7;
+    text-align: center;
+  }
+  .cb-cta {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    font-size: .85rem;
-    margin-top: 14px;
+    color: var(--color-lacquer);
+    border: 1px solid rgba(14,12,8,.5);
+    padding: 7px 14px;
+    border-radius: 2px;
+    transition: background .2s, color .2s;
+  }
+  .cb-cta:hover {
+    background: var(--color-lacquer);
+    color: var(--color-gold);
+  }
+
+  /* Tap hint: touch-only devices, hidden on hover-capable screens */
+  .chip-tap {
+    display: none;
+    font-family: var(--font-body);
+    font-size: .72rem;
+    letter-spacing: .04em;
+    color: var(--color-ink-dim);
+    opacity: .7;
+  }
+  @media (hover: none) {
+    .chip-tap { display: block; }
+    .role-chip.flipped .chip-tap { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip-inner { transition: none; }
   }
 
   .hero-line {
@@ -227,16 +593,17 @@ const craftColumns = [
     font-size: .85rem;
     letter-spacing: .12em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--color-lacquer);
+    background: var(--color-gold);
     border: 1px solid var(--color-gold-deep);
     padding: 12px 30px;
     border-radius: 2px;
     transition: background .25s, color .25s, border-color .25s;
   }
   .hero-cta:hover {
-    background: var(--color-crimson);
-    border-color: var(--color-crimson);
-    color: var(--color-lacquer);
+    background: transparent;
+    border-color: var(--color-gold-deep);
+    color: var(--color-gold);
   }
 
   /* ── About ────────────────────────────────────────────────────────────── */
@@ -248,6 +615,27 @@ const craftColumns = [
   }
   @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
   .about-grid p + p { margin-top: 14px; }
+
+  .avatar {
+    float: left;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 4px 22px 12px 0;
+    border: 2px solid rgba(240,179,28,.45);
+    box-shadow:
+      0 0 0 4px rgba(240,179,28,.08),
+      0 8px 24px rgba(0,0,0,.5);
+    shape-outside: circle(50%);
+  }
+  @media (max-width: 760px) {
+    .avatar {
+      float: none;
+      display: block;
+      margin: 0 auto 20px;
+    }
+  }
 
   /* ── Work cards ───────────────────────────────────────────────────────── */
   .cards {
@@ -264,6 +652,61 @@ const craftColumns = [
     gap: 22px;
   }
   @media (max-width: 880px) { .craft-grid { grid-template-columns: 1fr; } }
+
+  /* ── Story ───────────────────────────────────────────────────────────── */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 52px;
+    align-items: start;
+  }
+  @media (max-width: 760px) { .story-grid { grid-template-columns: 1fr; } }
+
+  .story-prose p + p { margin-top: 16px; }
+  .story-prose em {
+    font-style: italic;
+    color: var(--color-gold);
+  }
+
+  .spoon-fig {
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-lacquer-soft);
+    padding: 28px 20px 20px;
+    text-align: center;
+    position: relative;
+  }
+  .spoon-fig::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(224,39,45,.18);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .spoon-placeholder {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 8px;
+  }
+  figcaption {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .06em;
+    color: var(--color-ink-dim);
+    line-height: 1.5;
+    margin-top: 14px;
+  }
+  .fig-note {
+    display: block;
+    color: var(--color-green-vine);
+    margin-top: 4px;
+    font-size: .68rem;
+  }
+
+  @media (max-width: 760px) {
+    .spoon-fig { max-width: 280px; margin: 0 auto; }
+  }
 
   .craft { border-top: 2px solid var(--color-crimson); padding-top: 18px; }
 
