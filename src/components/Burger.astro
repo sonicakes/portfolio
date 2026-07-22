@@ -5,7 +5,7 @@
 ---
 
 <button
-  class="burger"
+  class="burger w-12 h-12 rounded-full bg-none cursor-pointer relative z-120 border border-hairline transition-[border-color] duration-300 hover:border-gold min-[1180px]:hidden"
   aria-expanded="false"
   aria-controls="menu"
   aria-label="Open menu"
@@ -17,19 +17,6 @@
 </button>
 
 <style>
-  .burger {
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--color-hairline);
-    border-radius: 50%;
-    background: none;
-    cursor: pointer;
-    position: relative;
-    z-index: 120;
-    transition: border-color .3s;
-  }
-  .burger:hover { border-color: var(--color-gold); }
-
   .burger .bar {
     position: absolute;
     left: 13px;
@@ -79,10 +66,5 @@
   }
   .burger[aria-expanded="true"] .berry {
     transform: translate(-10.5px, 1.5px) scale(1.5);
-  }
-
-  /* Hidden at ≥1180px where inline nav takes over */
-  @media (min-width: 1180px) {
-    .burger { display: none !important; }
   }
 </style>

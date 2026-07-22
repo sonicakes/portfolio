@@ -3,18 +3,18 @@ import FlowerMark from './FlowerMark.astro';
 import Burger from './Burger.astro';
 ---
 
-<nav>
-  <div class="nav-inner">
-    <div class="nav-mark">
+<nav class="sticky top-0 z-[90] bg-[rgba(14,12,8,.92)] backdrop-blur-[6px] border-b border-hairline">
+  <div class="flex items-center justify-between px-6 py-3 max-w-[1060px] mx-auto">
+    <div class="flex items-center gap-3">
       <FlowerMark />
-      <div class="nav-name">
-        <span class="nav-first">Sonia</span>
-        <span class="nav-last">Parker</span>
+      <div class="flex flex-col leading-[1.1]">
+        <span class="font-display text-xl text-gold tracking-[.06em]">Sonia</span>
+        <span class="font-mono text-[.68rem] text-ink-dim tracking-[.18em] uppercase">Parker</span>
       </div>
     </div>
 
     <!-- Inline links: visible ≥1180px -->
-    <div class="nav-links">
+    <div class="hidden min-[1180px]:flex gap-7 items-center font-mono text-[.82rem] tracking-[.08em] uppercase">
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="#craft">Craft</a>
@@ -25,61 +25,3 @@ import Burger from './Burger.astro';
     <Burger />
   </div>
 </nav>
-
-<style>
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 90;
-    background: rgba(14,12,8,.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--color-hairline);
-  }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 24px;
-    max-width: 1060px;
-    margin: 0 auto;
-  }
-
-  .nav-mark {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .nav-name {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-  }
-  .nav-first {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    color: var(--color-gold);
-    letter-spacing: .06em;
-  }
-  .nav-last {
-    font-family: var(--font-mono);
-    font-size: .68rem;
-    color: var(--color-ink-dim);
-    letter-spacing: .18em;
-    text-transform: uppercase;
-  }
-
-  /* Hidden until 1180px where it replaces the burger */
-  .nav-links {
-    display: none;
-    gap: 28px;
-    align-items: center;
-    font-family: var(--font-mono);
-    font-size: .82rem;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-  @media (min-width: 1180px) {
-    .nav-links { display: flex; }
-  }
-</style>

@@ -8,100 +8,19 @@ interface Props {
 const { title, kind, description, tags } = Astro.props;
 ---
 
-<article class="card">
+<article class="relative flex flex-col rounded border border-hairline bg-lacquer-soft px-6 pt-6.5 pb-5.5 transition-[border-color,transform] duration-300 hover:border-gold hover:-translate-y-[3px] motion-reduce:transition-none">
   <!-- Three CSS-only berry dots: brand echo, zero assets -->
-  <div class="card-berries" aria-hidden="true">
-    <i></i><i></i><i></i>
+  <div class="absolute top-3.5 right-3.5 flex gap-[5px]" aria-hidden="true">
+    <i class="relative block w-2 h-2 rounded-full bg-crimson after:content-[''] after:absolute after:inset-[2.5px] after:rounded-full after:bg-crimson-deep"></i>
+    <i class="relative block w-2 h-2 rounded-full bg-crimson after:content-[''] after:absolute after:inset-[2.5px] after:rounded-full after:bg-crimson-deep"></i>
+    <i class="relative block w-2 h-2 rounded-full bg-crimson after:content-[''] after:absolute after:inset-[2.5px] after:rounded-full after:bg-crimson-deep"></i>
   </div>
 
-  <h3>{title}</h3>
-  <p class="kind">{kind}</p>
-  <p>{description}</p>
+  <h3 class="font-display font-normal text-gold text-[1.18rem] tracking-[.04em] mb-1 pr-11">{title}</h3>
+  <p class="font-mono text-[.72rem] tracking-[.16em] uppercase text-crimson mb-3.5">{kind}</p>
+  <p class="text-[.95rem] text-ink-cream flex-1">{description}</p>
 
-  <div class="tags">
-    {tags.map(tag => <i>{tag}</i>)}
+  <div class="flex flex-wrap gap-[7px] mt-4.5">
+    {tags.map(tag => <i class="not-italic font-mono text-[.7rem] tracking-wider text-green-vine border border-green-vine/55 px-[9px] py-[3px] rounded-xs">{tag}</i>)}
   </div>
 </article>
-
-<style>
-  .card {
-    border: 1px solid var(--color-hairline);
-    border-radius: 4px;
-    background: var(--color-lacquer-soft);
-    padding: 26px 24px 22px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    transition: border-color .3s, transform .3s;
-  }
-  .card:hover {
-    border-color: var(--color-gold);
-    transform: translateY(-3px);
-  }
-
-  .card-berries {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    display: flex;
-    gap: 5px;
-  }
-  .card-berries i {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-crimson);
-    display: block;
-    position: relative;
-  }
-  .card-berries i::after {
-    content: "";
-    position: absolute;
-    inset: 2.5px;
-    border-radius: 50%;
-    background: var(--color-crimson-deep);
-  }
-
-  .card h3 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    color: var(--color-gold);
-    font-size: 1.18rem;
-    letter-spacing: .04em;
-    margin-bottom: 4px;
-    padding-right: 44px; /* clear the berry dots */
-  }
-
-  .card .kind {
-    font-family: var(--font-mono);
-    font-size: .72rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--color-crimson);
-    margin-bottom: 14px;
-  }
-
-  .card > p:not(.kind) {
-    font-size: .95rem;
-    color: var(--color-ink-cream);
-    flex: 1;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 18px;
-  }
-  /* Only green text on the site — signals "technology" as botanical layer */
-  .tags i {
-    font-style: normal;
-    font-family: var(--font-mono);
-    font-size: .7rem;
-    letter-spacing: .05em;
-    color: var(--color-green-vine);
-    border: 1px solid rgba(63,109,42,.55);
-    padding: 3px 9px;
-    border-radius: 2px;
-  }
-</style>

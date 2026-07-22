@@ -5,69 +5,21 @@
 import Spoons from './Spoons.astro';
 ---
 
-<section id="contact" class="wrap rise">
-  <div class="contact">
+<section id="contact" class="rise max-w-265 mx-auto px-6 py-18">
+  <div class="relative text-center rounded bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] text-lacquer py-13 px-6 before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/55 before:pointer-events-none">
     <Spoons />
 
-    <h2>Commission a piece</h2>
-    <p>
+    <h2 class="text-lacquer">Commission a piece</h2>
+    <p class="max-w-[520px] mx-auto mb-6.5 text-[#4d3c08]">
       Available for front-end and full-stack work. If you want a site with an
       actual point of view — dark grounds and gold leaf optional — get in touch.
     </p>
 
-    <div class="contact-row">
-      <a href="mailto:hello@example.com">Email</a>
-      <a href="#">GitHub</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Letterboxd</a>
+    <div class="flex justify-center flex-wrap gap-7 font-mono text-[.85rem] tracking-[.08em]">
+      <a href="mailto:hello@example.com" class="text-lacquer border-b-[1.5px] border-lacquer/45 pb-0.5 hover:text-crimson-deep hover:border-crimson-deep">Email</a>
+      <a href="#" class="text-lacquer border-b-[1.5px] border-lacquer/45 pb-0.5 hover:text-crimson-deep hover:border-crimson-deep">GitHub</a>
+      <a href="#" class="text-lacquer border-b-[1.5px] border-lacquer/45 pb-0.5 hover:text-crimson-deep hover:border-crimson-deep">LinkedIn</a>
+      <a href="#" class="text-lacquer border-b-[1.5px] border-lacquer/45 pb-0.5 hover:text-crimson-deep hover:border-crimson-deep">Letterboxd</a>
     </div>
   </div>
 </section>
-
-<style>
-  /* Gold gradient inversion */
-  .contact {
-    text-align: center;
-    border-radius: 4px;
-    position: relative;
-    background: linear-gradient(165deg, #f4bc27 0%, #e8a70f 55%, #cf920c 100%);
-    color: var(--color-lacquer);
-    padding: 52px 24px;
-  }
-  /* Black inner keyline: 1.5px inset 8px */
-  .contact::before {
-    content: "";
-    position: absolute;
-    inset: 8px;
-    border: 1.5px solid rgba(14,12,8,.55);
-    border-radius: 2px;
-    pointer-events: none;
-  }
-
-  .contact h2 { color: var(--color-lacquer); text-shadow: none; }
-
-  .contact p {
-    max-width: 520px;
-    margin: 0 auto 26px;
-    color: #4d3c08;
-  }
-
-  .contact-row {
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
-    font-family: var(--font-mono);
-    font-size: .85rem;
-    letter-spacing: .08em;
-  }
-  .contact-row a {
-    color: var(--color-lacquer);
-    border-bottom: 1.5px solid rgba(14,12,8,.45);
-    padding-bottom: 2px;
-  }
-  .contact-row a:hover {
-    color: var(--color-crimson-deep);
-    border-color: var(--color-crimson-deep);
-  }
-</style>

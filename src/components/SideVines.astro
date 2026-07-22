@@ -7,7 +7,7 @@
 ---
 
 <!-- Left vine -->
-<svg class="side-vine left" viewBox="0 0 56 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<svg class="side-vine fixed top-0 h-screen w-11 z-5 pointer-events-none hidden min-[820px]:block left-[5px]" viewBox="0 0 56 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <!-- Dashed guide: no pathLength — stroke-dasharray is in user units (§6.3) -->
   <path class="base"
     d="M28,-10 C10,90 46,170 28,270 C10,370 46,450 28,550 C10,650 46,730 28,820"
@@ -46,7 +46,7 @@
 </svg>
 
 <!-- Right vine: mirrored via transform -->
-<svg class="side-vine right" viewBox="0 0 56 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<svg class="side-vine fixed top-0 h-screen w-11 z-5 pointer-events-none hidden min-[820px]:block right-[5px]" viewBox="0 0 56 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
   <g transform="translate(56,0) scale(-1,1)">
     <path class="base"
       d="M28,-10 C10,90 46,170 28,270 C10,370 46,450 28,550 C10,650 46,730 28,820"
@@ -114,20 +114,6 @@
 </script>
 
 <style>
-  .side-vine {
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    width: 44px;
-    z-index: 5;
-    pointer-events: none;
-    display: none;
-  }
-  .side-vine.left  { left: 5px; }
-  .side-vine.right { right: 5px; }
-
-  @media (min-width: 820px) { .side-vine { display: block; } }
-
   /* Dashed underdrawing — always visible, signals "scroll for more" */
   .side-vine .base {
     opacity: .32;
