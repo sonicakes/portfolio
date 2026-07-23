@@ -8,7 +8,7 @@ interface Props {
 const { title, kind, description, tags } = Astro.props;
 ---
 
-<article class="relative flex flex-col rounded border border-hairline bg-lacquer-soft px-6 pt-6.5 pb-5.5 transition-[border-color,transform] duration-300 hover:border-gold hover:-translate-y-[3px] motion-reduce:transition-none">
+<article class="relative flex flex-col rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] px-6 pt-6.5 pb-5.5 shadow-[0_4px_12px_rgba(240,179,28,.1)] transition-[border-color,transform] duration-300 hover:border-gold hover:-translate-y-[3px] motion-reduce:transition-none before:content-[''] before:absolute before:inset-1.5 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
   <!-- Three CSS-only berry dots: brand echo, zero assets -->
   <div class="absolute top-3.5 right-3.5 flex gap-[5px]" aria-hidden="true">
     <i class="relative block w-2 h-2 rounded-full bg-crimson after:content-[''] after:absolute after:inset-[2.5px] after:rounded-full after:bg-crimson-deep"></i>

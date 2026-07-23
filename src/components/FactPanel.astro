@@ -11,7 +11,7 @@ interface Props {
 const { facts } = Astro.props;
 ---
 
-<aside class="relative rounded border border-hairline bg-lacquer-soft px-6.5 pt-6.5 pb-5.5 before:content-[''] before:absolute before:inset-1.5 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
+<aside class="relative rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] px-6.5 pt-6.5 pb-5.5 shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.5 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
   {facts.map(({ label, value }) => (
     <div class="flex justify-between gap-4 py-[9px] border-b border-dotted border-ink-cream/15 text-[.95rem] last:border-b-0">
       <b class="font-mono font-normal text-[.78rem] tracking-widest uppercase text-ink-dim whitespace-nowrap pt-0.5">{label}</b>

@@ -21,6 +21,14 @@
       <path d="M14,-14 C24,-28 36,-36 48,-40" stroke="#3f6d2a" stroke-width="2" fill="none"/>
     </g>
     <path id="petal" d="M0,0 C-16,-24 -16,-56 0,-78 C16,-56 16,-24 0,0 Z"/>
+    <radialGradient id="shine" cx="42%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff8e0" stop-opacity=".15"/>
+      <stop offset="35%" stop-color="#f0b31c" stop-opacity=".05"/>
+      <stop offset="100%" stop-color="#f0b31c" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shineBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
     <g id="cluster">
       <use href="#berry" x="0"  y="0"/><use href="#berry" x="16" y="-6"/>
       <use href="#berry" x="30" y="2"/><use href="#berry" x="8"  y="14"/>
@@ -106,6 +114,9 @@
     <circle cx="380" cy="358" r="7"/>
     <circle cx="444" cy="340" r="6"/>
   </g>
+
+  <!-- Lacquer shine: soft light catching the rosette, fades in last -->
+  <ellipse class="bloom late" cx="380" cy="150" rx="160" ry="120" fill="url(#shine)" filter="url(#shineBlur)" style="mix-blend-mode: screen" pointer-events="none"/>
 </svg>
 
 <style>
