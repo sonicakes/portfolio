@@ -60,59 +60,7 @@ const projects = [
     github: '',
     image: '/projs/filmladyprods.png',
   },
-  {
-    title: 'Launch Countdown Timer',
-    kind: 'Frontend Mentor challenge',
-    description:
-      'A live countdown to a rocket launch date — days, hours, minutes and seconds ticking down with responsive layout and hover states, built to match the challenge design file.',
-    tags: ['React', 'Vite'],
-    roles: ['design', 'dev'],
-    featured: false,
-    live: 'https://cakes-countdown.netlify.app/',
-    github: '',
-    challenge: 'https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-',
-    image: '',
-  },
-  {
-    title: 'Product List with Cart',
-    kind: 'Frontend Mentor challenge',
-    description:
-      'A dessert menu that builds a live shopping cart as items are added — quantity controls, running total, and a confirmation state on order.',
-    tags: ['React', 'Vite'],
-    roles: ['design', 'dev'],
-    featured: false,
-    live: 'https://dez-cart-react.netlify.app/',
-    github: '',
-    challenge: 'https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d',
-    image: '',
-  },
-  {
-    title: 'Interactive Rating Component',
-    kind: 'Frontend Mentor challenge',
-    description:
-      'A star-rating widget with selectable states and a submitted-confirmation view, built to spec for interaction and accessibility.',
-    tags: ['React', 'Vite'],
-    roles: ['design', 'dev'],
-    featured: false,
-    live: 'https://rating-cakes-component.netlify.app/',
-    github: '',
-    challenge: 'https://www.frontendmentor.io/challenges/interactive-rating-component-koxpeBUmI',
-    image: '',
-  },
-  {
-    title: 'Weather App',
-    kind: 'Frontend Mentor challenge',
-    description:
-      'A weather lookup app pulling live forecast data by location, with unit toggling and responsive loading/error states.',
-    tags: ['React', 'Vite', 'Weather API'],
-    roles: ['dev'],
-    featured: false,
-    live: 'https://weather-cakes.netlify.app/',
-    github: '',
-    challenge: 'https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49',
-    image: '',
-  },
-  {
+    {
     title: 'Space Tourism',
     kind: 'Frontend Mentor challenge',
     description:
@@ -123,8 +71,23 @@ const projects = [
     live: 'https://space-tourism-cakes.netlify.app/',
     github: '',
     challenge: 'https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3',
-    image: '',
+    image: '/projs/space.png',
   },
+    {
+    title: 'Weather App',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A weather lookup app pulling live forecast data by location, with unit toggling and responsive loading/error states.',
+    tags: ['React', 'Vite', 'Weather API'],
+    roles: ['dev'],
+    featured: false,
+    live: 'https://weather-cakes.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49',
+    image: '/projs/weather.png',
+  },
+
+
 ];
 
 // Featured projects sort first but stay mixed into the same filterable grid.
@@ -146,7 +109,7 @@ const facts = [
   { label: 'Focus',           value: 'Front-end dev, UI/UX & Creative' },
   { label: 'Methodology',     value: 'Agile/Scrum · Code review & QA' },
   { label: 'Human Languages', value: 'RU (native) · EN (fluent) · FR/ES (working) · TH (basic)' },
-  { label: 'Off-duty',        value: 'Cinephile · Cynophile · Bibliophile · Linguaphile' },
+  { label: 'Off-duty',        value: 'Cinephile · Cynophile · Bibliophile · Linguaphile · Logophile' },
 ];
 
 const craftColumns = [
@@ -178,7 +141,7 @@ const craftColumns = [
       'Netlify, Vercel & Cloudflare',
       'Railway & Render',
       'GitHub & CI/CD pipelines',
-      'Claude Code & AI-assisted workflows',
+      'Claude Code, Gemini & AI-assisted workflows',
     ],
   },
 ];
@@ -191,6 +154,12 @@ const craftColumns = [
     <Kustik />
     <h1 class="font-display font-normal text-[clamp(2.6rem,7vw,4.4rem)] text-gold tracking-wider leading-[1.05] text-shadow-[0_0_26px_rgba(240,179,28,.22)]">Sonia</h1>
     <p class="font-display text-[clamp(1.1rem,2.8vw,1.55rem)] text-ink-dim tracking-[.08em] -mt-1.5">Parker</p>
+
+    <div class="flex justify-center flex-wrap gap-4 mt-4">
+      <a class="inline-block font-mono text-[.85rem] tracking-[.12em] uppercase text-gold border border-gold/50 px-7.5 py-3 rounded-xs transition-[background,color] duration-250 hover:bg-gold hover:text-lacquer max-[620px]:order-1" href="/cv.pdf" download>Résumé</a>
+      <a class="hero-cta inline-block font-mono text-[.85rem] tracking-[.12em] uppercase text-lacquer bg-gold border border-gold-deep px-7.5 py-3 rounded-xs transition-[background,color,border-color] duration-250 hover:bg-transparent hover:border-gold-deep hover:text-gold max-[620px]:order-3" href="#work-all">my work</a>
+      <a class="inline-block font-mono text-[.85rem] tracking-[.12em] uppercase text-gold border border-gold/50 px-7.5 py-3 rounded-xs transition-[background,color] duration-250 hover:bg-gold hover:text-lacquer max-[620px]:order-2" href="mailto:hire-me@soniaparker.net">Email Me</a>
+    </div>
 
     <!-- Vine arrows: branch from name down to each role card -->
     <svg class="role-vines block w-[min(600px,100%)] h-22 mt-1.5 mx-auto overflow-visible" viewBox="0 0 580 88" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
@@ -221,8 +190,8 @@ const craftColumns = [
       </g>
     </svg>
 
-    <div class="hero-roles flex justify-center gap-7 flex-wrap mt-0 w-full">
-      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer">
+    <div class="hero-roles flex justify-center gap-7 flex-wrap mt-0 w-full max-[620px]:flex-col max-[620px]:items-center">
+      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
         <div class="chip-inner relative w-full h-full transform-3d">
           <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
             <ChipFlower />
@@ -236,7 +205,7 @@ const craftColumns = [
           </div>
         </div>
       </div>
-      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer">
+      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
         <div class="chip-inner relative w-full h-full transform-3d">
           <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
             <Spoons />
@@ -250,7 +219,7 @@ const craftColumns = [
           </div>
         </div>
       </div>
-      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer">
+      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
         <div class="chip-inner relative w-full h-full transform-3d">
           <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
             <ChipBerry />
@@ -265,8 +234,6 @@ const craftColumns = [
         </div>
       </div>
     </div>
-
-    <a class="hero-cta inline-block mt-7.5 font-mono text-[.85rem] tracking-[.12em] uppercase text-lacquer bg-gold border border-gold-deep px-7.5 py-3 rounded-xs transition-[background,color,border-color] duration-250 hover:bg-transparent hover:border-gold-deep hover:text-gold" href="#work-all">See all work</a>
   </header>
   <!-- Spoon handle: flow element between bowl and divider -->
   <div class="w-1.5 h-9 mx-auto rounded-b bg-[linear-gradient(to_bottom,rgba(240,179,28,.55),rgba(240,179,28,.22))] shadow-[0_6px_16px_rgba(0,0,0,.4),0_2px_6px_rgba(0,0,0,.3)]" aria-hidden="true"></div>
@@ -285,32 +252,31 @@ const craftColumns = [
 
            I treat interfaces the way Khokhloma
           masters treat wood: start with a dark, quiet ground, then apply ornament
-          only where it earns its place. Most of my work lives at the front-end —
-          Vue and React, but also the design decisions underneath: type scales,
+          only where it earns its place. Most of my work lives at the front-end but also the design decisions underneath: type scales,
           spacing systems, interaction states. What I find most interesting is the
           distance between a design file and a finished interface, and how much
           craft it takes to close it faithfully.
         </p>
         <p class="mt-3.5">
-          I didn't start here. My first degree was a Master's in international
-          economics — reading systems, not building them. I retrained through a
-          web development immersive, then a Bachelor of Arts in Digital
-          Experience & Interaction Design, and picked up an Azure administrator
-          certification along the way. Since 2018 I've worked front-of-house and
-          back across agency and client sites in parking, mining, hospitality,
-          retail and more — different industries, same brief: make it considered,
-          not just functional.
+          I didn't start here. My first degree was a Master's in International
+          Economics back in Russia — reading systems, not building them. As a lover of human languages, I was also enrolled in minor Professional Translation & Interpretation Degree with focus on Business English, French & Spanish. 
         </p>
+        <p class="mt-3.5">After I arrived in Australia I taught myself to code since I felt like my heart was not quite in Global Finances & Commerce. I further undertook a
+          bootcamp-style course in Web Development Immersive, whilst also pursuing a Bachelor of Arts in Digital
+          Experience & Interaction Design. </p>
+          <p class="mt-3.5">Since 2018 I've worked front-of-house and
+          back across agency and client sites in parking, mining, hospitality,
+          retail industries, to list a few. Apart from 9-5 routine, I've picked up an Azure administrator
+          certification along the way, whilst remaining active in tech community by mentoring & volunteering at coding-related events (Women Who Code, Code Like A Girl) - in-person at first, then remotely after Covid hit in 2020.</p>
         <p class="mt-3.5">
-          Outside client work I run an independent production label where I build
+          To fulfill my long-term dream of having my own creative establishment, I run an independent production label where I build
           everything myself end-to-end: a podcast platform on Next.js 15, a browser
-          game in React, and a blog — my own three-panel folk triptych of code,
+          game in React, and a movie blog — my own three-panel folk triptych of code,
           film criticism and mischief.
         </p>
         <p class="mt-3.5">
-          The artwork on this page is drawn from a piece I painted myself — a
-          traditional spoon in the Kudrina style: black field, crimson rosette,
-          gold leaves, rowan berries.
+          The artwork on this page is based on IRL spoon brought from Russia. I created it myself in AI - Adobe Illustrator, not ChatGPT: back then things were done by hand, hehe —
+          as part of my degree assignments. But of course, we need to move on with the times - Claude Code has assisted with manual parts of coding the components & logic for this portfolio (& most of my recent projects, too!).
         </p>
       </div>
       <FactPanel facts={facts} />
@@ -328,10 +294,11 @@ const craftColumns = [
       {workFilters.map(f => (
         <button
           type="button"
-          class="work-filter-pill font-mono text-[.72rem] tracking-[.12em] uppercase px-4 py-1.75 rounded-xs border border-hairline text-ink-dim transition-[border-color,color] duration-200 hover:text-gold hover:border-gold/50"
+          class="work-filter-pill font-mono text-[.72rem] tracking-[.12em] uppercase px-4 py-1.75 rounded-xs border border-hairline text-ink-dim cursor-pointer transition-[border-color,color] duration-200 hover:text-gold hover:border-gold/50"
           data-role={f.key}
           role="tab"
           aria-selected={f.key === 'all' ? 'true' : 'false'}
+          aria-controls="work-all-grid"
         >{f.label}</button>
       ))}
     </div>
@@ -356,8 +323,8 @@ const craftColumns = [
       <button
         type="button"
         id="work-load-more"
-        class="col-span-3 max-[880px]:col-span-1 justify-self-center font-mono text-[.78rem] tracking-[.14em] uppercase text-gold border border-gold/50 px-6 py-2.5 rounded-xs transition-colors hover:bg-gold hover:text-lacquer"
-      >Load more work ↓</button>
+        class="col-span-3 max-[880px]:col-span-1 justify-self-center inline-flex items-center justify-center gap-1 font-mono text-[.78rem] tracking-[.14em] uppercase text-gold border border-gold/50 px-6 py-2.5 rounded-xs cursor-pointer transition-colors hover:bg-gold hover:text-lacquer"
+      >Load more work<span aria-hidden="true">↓</span></button>
 
       {sortedProjects.filter(p => !p.featured).map(p => (
         <ProjectCard
@@ -440,7 +407,6 @@ const craftColumns = [
         </div>
         <figcaption class="font-mono text-[.72rem] tracking-[.06em] text-ink-dim leading-normal mt-3.5">
           The hand-painted Khokhloma spoon this site's ornament is based on.
-          <span class="block mt-1 text-[.68rem]">Ornament art created in Adobe Illustrator by me, based on IRL spoon brought from birth country.</span>
         </figcaption>
       </figure>
     </div>
@@ -561,6 +527,7 @@ const craftColumns = [
     transition: transform .55s cubic-bezier(.4,0,.2,1);
   }
   .role-chip:hover .chip-inner,
+  .role-chip:focus-within .chip-inner,
   .role-chip.flipped .chip-inner {
     transform: rotateY(180deg);
   }

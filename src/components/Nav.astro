@@ -5,13 +5,13 @@ import Burger from './Burger.astro';
 
 <nav class="sticky top-0 z-[90] bg-[rgba(14,12,8,.92)] backdrop-blur-[6px] border-b border-hairline">
   <div class="flex items-center justify-between px-6 py-3 max-w-[1060px] mx-auto">
-    <div class="flex items-center gap-3">
+    <a href="/" class="flex items-center gap-3" aria-label="Sonia Parker — home">
       <FlowerMark />
       <div class="flex flex-col leading-[1.1]">
         <span class="font-display text-xl text-gold tracking-[.06em]">Sonia</span>
         <span class="font-mono text-[.68rem] text-ink-dim tracking-[.18em] uppercase">Parker</span>
       </div>
-    </div>
+    </a>
 
     <!-- Inline links: visible ≥1180px -->
     <div class="hidden min-[1180px]:flex gap-7 items-center font-mono text-[.82rem] tracking-[.08em] uppercase">
