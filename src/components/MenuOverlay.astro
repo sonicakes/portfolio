@@ -4,10 +4,10 @@
 // Escape closes; scroll locked while open; all ARIA on burger handled here.
 ---
 
-<div class="menu-overlay" id="menu" role="dialog" aria-label="Site menu">
+<div class="menu-overlay fixed inset-0 z-110 bg-[rgba(14,12,8,.97)] flex items-center justify-center" id="menu" role="dialog" aria-label="Site menu">
 
   <!-- Left-edge vine: draws top-to-bottom on each open -->
-  <svg class="menu-vine" viewBox="0 0 60 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <svg class="menu-vine absolute left-[clamp(14px,6vw,80px)] top-0 h-full w-[60px]" viewBox="0 0 60 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path class="mv" pathLength="1"
       d="M30,-10 C10,90 50,170 30,270 C10,370 50,450 30,550 C10,650 50,730 30,820"
       fill="none" stroke="#1e4a1f" stroke-width="4" stroke-linecap="round"/>
@@ -31,17 +31,17 @@
     </g>
   </svg>
 
-  <button class="menu-close" aria-label="Close menu">
-    <span class="mc-bar"></span>
-    <span class="mc-bar"></span>
+  <button class="menu-close absolute top-[18px] right-5 w-12 h-12 bg-none rounded-full cursor-pointer flex items-center justify-center border border-crimson/35 transition-[border-color] duration-300 hover:border-crimson" aria-label="Close menu">
+    <span class="mc-bar absolute w-5 h-0.5 rounded-sm bg-crimson"></span>
+    <span class="mc-bar absolute w-5 h-0.5 rounded-sm bg-crimson"></span>
   </button>
 
-  <ul class="menu-list">
-    <li><a href="#about">About<span class="ru" lang="ru">О себе</span></a></li>
-    <li><a href="#work">Work<span class="ru" lang="ru">Работы</span></a></li>
-    <li><a href="#craft">Craft<span class="ru" lang="ru">Ремесло</span></a></li>
-    <li><a href="#story">Story<span class="ru" lang="ru">История</span></a></li>
-    <li><a href="#contact">Contact<span class="ru" lang="ru">Связь</span></a></li>
+  <ul class="menu-list list-none text-center">
+    <li><a class="group inline-block px-2.5 py-3.5 font-display text-[clamp(1.7rem,5vw,2.5rem)] text-gold tracking-wider hover:text-crimson" href="#about">About<span class="ru block font-mono text-[.75rem] tracking-[.34em] uppercase text-ink-dim -mt-1 group-hover:text-crimson" lang="ru">О себе</span></a></li>
+    <li><a class="group inline-block px-2.5 py-3.5 font-display text-[clamp(1.7rem,5vw,2.5rem)] text-gold tracking-wider hover:text-crimson" href="#work">Work<span class="ru block font-mono text-[.75rem] tracking-[.34em] uppercase text-ink-dim -mt-1 group-hover:text-crimson" lang="ru">Работы</span></a></li>
+    <li><a class="group inline-block px-2.5 py-3.5 font-display text-[clamp(1.7rem,5vw,2.5rem)] text-gold tracking-wider hover:text-crimson" href="#craft">Craft<span class="ru block font-mono text-[.75rem] tracking-[.34em] uppercase text-ink-dim -mt-1 group-hover:text-crimson" lang="ru">Ремесло</span></a></li>
+    <li><a class="group inline-block px-2.5 py-3.5 font-display text-[clamp(1.7rem,5vw,2.5rem)] text-gold tracking-wider hover:text-crimson" href="#story">Story<span class="ru block font-mono text-[.75rem] tracking-[.34em] uppercase text-ink-dim -mt-1 group-hover:text-crimson" lang="ru">История</span></a></li>
+    <li><a class="group inline-block px-2.5 py-3.5 font-display text-[clamp(1.7rem,5vw,2.5rem)] text-gold tracking-wider hover:text-crimson" href="#contact">Contact<span class="ru block font-mono text-[.75rem] tracking-[.34em] uppercase text-ink-dim -mt-1 group-hover:text-crimson" lang="ru">Связь</span></a></li>
   </ul>
 </div>
 
@@ -65,54 +65,14 @@
 
 <style>
   .menu-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 110;
-    background: rgba(14,12,8,.97);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 0;
     pointer-events: none;
     transition: opacity .4s ease;
   }
   .menu-overlay.open { opacity: 1; pointer-events: auto; }
 
-  /* Close button: top-right, crimson ✕ */
-  .menu-close {
-    position: absolute;
-    top: 18px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    background: none;
-    border: 1px solid rgba(224,39,45,.35);
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: border-color .3s;
-  }
-  .menu-close:hover { border-color: var(--color-crimson); }
-  .mc-bar {
-    position: absolute;
-    width: 20px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--color-crimson);
-  }
   .mc-bar:nth-child(1) { transform: rotate(45deg); }
   .mc-bar:nth-child(2) { transform: rotate(-45deg); }
-
-  /* Vine container: left-edge, full height */
-  .menu-vine {
-    position: absolute;
-    left: clamp(14px, 6vw, 80px);
-    top: 0;
-    height: 100%;
-    width: 60px;
-  }
 
   /* Vine paths draw on open; reset when .open drops (dashoffset returns to 1 instantly) */
   .menu-overlay.open .menu-vine .mv {
@@ -126,7 +86,6 @@
   }
 
   /* Nav links: staggered rise-in */
-  .menu-list { list-style: none; text-align: center; }
   .menu-list li { opacity: 0; transform: translateY(14px); }
   .menu-overlay.open .menu-list li {
     animation: riseIn .55s ease forwards;
@@ -136,26 +95,4 @@
   .menu-overlay.open .menu-list li:nth-child(3) { animation-delay: .51s; }
   .menu-overlay.open .menu-list li:nth-child(4) { animation-delay: .64s; }
   .menu-overlay.open .menu-list li:nth-child(5) { animation-delay: .77s; }
-
-  .menu-list a {
-    display: inline-block;
-    padding: 14px 10px;
-    font-family: var(--font-display);
-    font-size: clamp(1.7rem, 5vw, 2.5rem);
-    color: var(--color-gold);
-    letter-spacing: .05em;
-  }
-  .menu-list a:hover { color: var(--color-crimson); }
-
-  /* Russian sublabels */
-  .menu-list .ru {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: .75rem;
-    letter-spacing: .34em;
-    text-transform: uppercase;
-    color: var(--color-ink-dim);
-    margin-top: -4px;
-  }
-  .menu-list a:hover .ru { color: var(--color-crimson); }
 </style>

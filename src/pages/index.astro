@@ -9,6 +9,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 import FactPanel from '../components/FactPanel.astro';
 import ContactPanel from '../components/ContactPanel.astro';
 
+// `roles` drive the Work filter pills; `featured` sorts a project first and gives it the larger card treatment.
+// `github` / `image` are left blank for pieces still awaiting links & screenshots.
 const projects = [
   {
     title: 'Kino Royale',
@@ -16,30 +18,135 @@ const projects = [
     description:
       'Full production site for an independent film-criticism podcast: git-backed CMS, custom RSS feed endpoint, zero-egress audio delivery, and a bespoke design system with strict token rules.',
     tags: ['Next.js 15', 'TypeScript', 'Tailwind v4', 'Decap CMS', 'Cloudflare R2'],
-  },
-  {
-    title: 'Royal Simulator',
-    kind: 'Browser game',
-    description:
-      'A darkly comic choose-your-fate horror game with a large library of authored scenarios driven from a single JSON data file, styled after Polish film posters.',
-    tags: ['React', 'Vite', 'TypeScript', 'Tailwind v4', 'Netlify'],
+    roles: ['dev', 'content'],
+    featured: true,
+    live: 'https://kinoroyale.net',
+    github: '',
+    image: '/projs/kino-royale-pod.png',
   },
   {
     title: 'Cinefile Blog',
     kind: 'Publication',
     description:
       'A film review publication built and operated end-to-end: custom domain and DNS, static delivery, and long-form criticism with proper Chicago-style citations.',
-    tags: ['Static site', 'Netlify', 'Custom DNS', 'Editorial design'],
+    tags: ['Strapi Headless CMS', 'Neon Postgres', 'Custom DNS', 'Editorial design'],
+    roles: ['content', 'dev'],
+    featured: true,
+    live: 'https://cinefileblog.com',
+    github: '',
+    image: '/projs/cinefile-blog.png',
+  },
+  {
+    title: 'Royal Simulator',
+    kind: 'Browser game',
+    description:
+      'A darkly comic choose-your-fate horror game with a large library of authored scenarios driven from a single JSON data file, styled after Polish film posters.',
+    tags: ['React', 'React Router v7', 'TypeScript', 'Tailwind v4', 'Netlify'],
+    roles: ['dev', 'design'],
+    featured: true,
+    live: 'https://royal-simulator.netlify.app/',
+    github: '',
+    image: '/projs/royal-simulator-poster.png',
+  },
+  {
+    title: 'Film Lady Productions',
+    kind: 'Studio site',
+    description:
+      'The home base for my independent production label — "a court of cinema, criticism & controlled chaos" tying together Kino Royale, Cinefile Blog and other self-directed work under one identity.',
+    tags: ['Gatsby 5', 'Tailwind v4', 'Typescript', 'GSAP'],
+    roles: ['dev', 'content', 'design'],
+    featured: false,
+    live: 'https://filmladyproductions.netlify.app/',
+    github: '',
+    image: '/projs/filmladyprods.png',
+  },
+  {
+    title: 'Launch Countdown Timer',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A live countdown to a rocket launch date — days, hours, minutes and seconds ticking down with responsive layout and hover states, built to match the challenge design file.',
+    tags: ['React', 'Vite'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://cakes-countdown.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-',
+    image: '',
+  },
+  {
+    title: 'Product List with Cart',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A dessert menu that builds a live shopping cart as items are added — quantity controls, running total, and a confirmation state on order.',
+    tags: ['React', 'Vite'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://dez-cart-react.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d',
+    image: '',
+  },
+  {
+    title: 'Interactive Rating Component',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A star-rating widget with selectable states and a submitted-confirmation view, built to spec for interaction and accessibility.',
+    tags: ['React', 'Vite'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://rating-cakes-component.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/interactive-rating-component-koxpeBUmI',
+    image: '',
+  },
+  {
+    title: 'Weather App',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A weather lookup app pulling live forecast data by location, with unit toggling and responsive loading/error states.',
+    tags: ['React', 'Vite', 'Weather API'],
+    roles: ['dev'],
+    featured: false,
+    live: 'https://weather-cakes.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49',
+    image: '',
+  },
+  {
+    title: 'Space Tourism',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A multi-page space-tourism site with per-page layout and typography shifts across breakpoints — Frontend Mentor\'s most detailed responsive design brief.',
+    tags: ['React Router', 'Vite', 'Tailwind CSS'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://space-tourism-cakes.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3',
+    image: '',
   },
 ];
 
+// Featured projects sort first but stay mixed into the same filterable grid.
+const sortedProjects = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
+
+const workFilters = [
+  { key: 'all',     label: 'All' },
+  { key: 'design',  label: 'Design' },
+  { key: 'dev',     label: 'Dev' },
+  { key: 'content', label: 'Content' },
+];
+
 const facts = [
-  { label: 'Base',       value: 'Sydney, Australia' },
-  { label: 'Origins',    value: 'Russian-born, Australian-made.' },
-  { label: 'Experience', value: '6+ years professional' },
-  { label: 'Cloud',      value: 'Azure certified (AZ-104)' },
-  { label: 'Languages',  value: 'Russian · English · French · Spanish' },
-  { label: 'Off-duty',   value: 'Film criticism, folk art, one Labrador' },
+  { label: 'Base',            value: 'Sydney, Australia' },
+  { label: 'Origins',         value: 'The Town of N, Russia' },
+  { label: 'Experience',      value: '7+ years professional' },
+  { label: 'Education',       value: "Curtin Uni, AU '23 · BA in Digital Design & Interaction" },
+  { label: 'Cloud',           value: 'Azure certified (AZ-104)' },
+  { label: 'Focus',           value: 'Front-end dev, UI/UX & Creative' },
+  { label: 'Methodology',     value: 'Agile/Scrum · Code review & QA' },
+  { label: 'Human Languages', value: 'RU (native) · EN (fluent) · FR/ES (working) · TH (basic)' },
+  { label: 'Off-duty',        value: 'Cinephile · Cynophile · Bibliophile · Linguaphile' },
 ];
 
 const craftColumns = [
@@ -47,30 +154,31 @@ const craftColumns = [
     heading: 'Front of house',
     items: [
       'TypeScript & modern JavaScript',
-      'React & Next.js',
-      'Vue.js',
+      'React, Next.js & Vue.js',
       'Tailwind CSS & design tokens',
+      'Figma, Adobe XD & InVision',
+      'Adobe Suite & Canva',
       'Accessible, responsive UI',
     ],
   },
   {
     heading: 'Back of house',
     items: [
-      'C# / .NET',
-      'Node.js',
-      'PostgreSQL (Neon)',
-      'Headless & git-backed CMS',
+      'C# / .NET & Blazor',
+      'Sitecore, Kentico & Umbraco',
+      'Shopify, WordPress & Strapi',
+      'Node.js & PostgreSQL (Neon)',
       'REST APIs & RSS pipelines',
     ],
   },
   {
     heading: 'Workshop',
     items: [
-      'Azure — certified administrator',
-      'AWS & Cloudflare',
-      'Netlify CI/CD',
-      'Database migrations',
-      'Audio production tooling',
+      'Azure — certified administrator (AZ-104)',
+      'Netlify, Vercel & Cloudflare',
+      'Railway & Render',
+      'GitHub & CI/CD pipelines',
+      'Claude Code & AI-assisted workflows',
     ],
   },
 ];
@@ -79,13 +187,13 @@ const craftColumns = [
 <Base>
 
   <!-- ── Hero ──────────────────────────────────────────────────────────── -->
-  <header>
+  <header class="text-center relative px-12 pb-11 bg-[radial-gradient(ellipse_70%_55%_at_50%_38%,rgba(240,179,28,.02)_0%,rgba(200,120,12,.012)_40%,transparent_70%),radial-gradient(ellipse_40%_30%_at_50%_22%,rgba(240,179,28,.015)_0%,transparent_100%)]">
     <Kustik />
-    <h1>Sonia</h1>
-    <p class="hero-surname">Parker</p>
+    <h1 class="font-display font-normal text-[clamp(2.6rem,7vw,4.4rem)] text-gold tracking-wider leading-[1.05] text-shadow-[0_0_26px_rgba(240,179,28,.22)]">Sonia</h1>
+    <p class="font-display text-[clamp(1.1rem,2.8vw,1.55rem)] text-ink-dim tracking-[.08em] -mt-1.5">Parker</p>
 
     <!-- Vine arrows: branch from name down to each role card -->
-    <svg class="role-vines" viewBox="0 0 580 88" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+    <svg class="role-vines block w-[min(600px,100%)] h-22 mt-1.5 mx-auto overflow-visible" viewBox="0 0 580 88" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
       <!-- Left stem → Digital Designer -->
       <path class="rv-stem rv-stem--l" pathLength="1"
         d="M290,2 C270,18 230,30 185,46 C155,57 120,64 92,74"
@@ -113,68 +221,68 @@ const craftColumns = [
       </g>
     </svg>
 
-    <div class="hero-roles">
-      <div class="role-chip">
-        <div class="chip-inner">
-          <div class="chip-front">
+    <div class="hero-roles flex justify-center gap-7 flex-wrap mt-0 w-full">
+      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer">
+        <div class="chip-inner relative w-full h-full transform-3d">
+          <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
             <ChipFlower />
-            <span>Digital Designer</span>
-            <span class="chip-tap" aria-hidden="true">Tap to reveal</span>
+            <span class="font-display text-base tracking-wider text-gold">Digital Designer</span>
+            <span class="chip-tap font-body text-[.72rem] tracking-[.04em] text-ink-dim opacity-70" aria-hidden="true">Tap to reveal</span>
           </div>
-          <div class="chip-back">
-            <span class="cb-title">Digital Designer</span>
-            <p class="cb-skills">UI/UX · Design systems<br/>Figma → production code</p>
-            <a href="#work" class="cb-cta">See design work</a>
+          <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
+            <span class="font-display text-base text-lacquer tracking-wider">Digital Designer</span>
+            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">UI/UX · Design systems<br/>Figma → production code</p>
+            <a href="#work-all" data-work-filter="design" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See design work</a>
           </div>
         </div>
       </div>
-      <div class="role-chip">
-        <div class="chip-inner">
-          <div class="chip-front">
+      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer">
+        <div class="chip-inner relative w-full h-full transform-3d">
+          <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
             <Spoons />
-            <span>Front-End Dev</span>
-            <span class="chip-tap" aria-hidden="true">Tap to reveal</span>
+            <span class="font-display text-base tracking-wider text-gold">Front-End Dev</span>
+            <span class="chip-tap font-body text-[.72rem] tracking-[.04em] text-ink-dim opacity-70" aria-hidden="true">Tap to reveal</span>
           </div>
-          <div class="chip-back">
-            <span class="cb-title">Front-End Dev</span>
-            <p class="cb-skills">Vue · React · TypeScript<br/>Tailwind · design tokens</p>
-            <a href="#work" class="cb-cta">See dev projects</a>
+          <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
+            <span class="font-display text-base text-lacquer tracking-wider">Front-End Dev</span>
+            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Vue · React · TypeScript<br/>Tailwind · CSS</p>
+            <a href="#work-all" data-work-filter="dev" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See dev projects</a>
           </div>
         </div>
       </div>
-      <div class="role-chip">
-        <div class="chip-inner">
-          <div class="chip-front">
+      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer">
+        <div class="chip-inner relative w-full h-full transform-3d">
+          <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
             <ChipBerry />
-            <span>Content Creator</span>
-            <span class="chip-tap" aria-hidden="true">Tap to reveal</span>
+            <span class="font-display text-base tracking-wider text-gold">Content Creator</span>
+            <span class="chip-tap font-body text-[.72rem] tracking-[.04em] text-ink-dim opacity-70" aria-hidden="true">Tap to reveal</span>
           </div>
-          <div class="chip-back">
-            <span class="cb-title">Content Creator</span>
-            <p class="cb-skills">Film criticism · Podcast<br/>Editorial · Production</p>
-            <a href="#work" class="cb-cta">See content work</a>
+          <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
+            <span class="font-display text-base text-lacquer tracking-wider">Content Creator</span>
+            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Kino Royale Podcast · <br/>The Cinefile Blog · Production</p>
+            <a href="#work-all" data-work-filter="content" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See content work</a>
           </div>
         </div>
       </div>
     </div>
-    
-    <a class="hero-cta" href="#work">See all work</a>
+
+    <a class="hero-cta inline-block mt-7.5 font-mono text-[.85rem] tracking-[.12em] uppercase text-lacquer bg-gold border border-gold-deep px-7.5 py-3 rounded-xs transition-[background,color,border-color] duration-250 hover:bg-transparent hover:border-gold-deep hover:text-gold" href="#work-all">See all work</a>
   </header>
   <!-- Spoon handle: flow element between bowl and divider -->
-  <div class="hero-handle" aria-hidden="true"></div>
+  <div class="w-1.5 h-9 mx-auto rounded-b bg-[linear-gradient(to_bottom,rgba(240,179,28,.55),rgba(240,179,28,.22))] shadow-[0_6px_16px_rgba(0,0,0,.4),0_2px_6px_rgba(0,0,0,.3)]" aria-hidden="true"></div>
 
   <Divider phase="a" />
 
   <!-- ── About ─────────────────────────────────────────────────────────── -->
-  <section id="about" class="wrap rise">
-    <h2>About</h2>
-    <p class="sub">The artisan behind the lacquer</p>
-    <div class="about-grid">
+  <section id="about" class="rise max-w-265 mx-auto px-6 py-18">
+    <h2 class="font-display font-normal text-gold text-[clamp(1.5rem,3.6vw,2.1rem)] tracking-wider text-center mb-2">About</h2>
+    <p class="sub text-center font-mono text-[.78rem] tracking-[.22em] uppercase text-ink-dim mb-11">The artisan behind the lacquer</p>
+    <div class="about-grid grid grid-cols-[1.4fr_1fr] gap-11 items-start max-[760px]:grid-cols-1">
       <div>
         <p>
-          <img src="/avatar.jpg" alt="Sonia Parker" class="avatar" />
-          <span>привет! (Privet! - Hello!) </span>I'm a Russian-Australian Designer, Developer & Content Creator based around Sydney, Australia.
-    
+          <img src="/avatar.jpg" alt="Sonia Parker" class="avatar float-left w-50 h-50 rounded-full object-cover mt-1 mr-5.5 mb-3 ml-0 border-2 border-gold/45 shadow-[0_0_0_4px_rgba(240,179,28,.08),0_8px_24px_rgba(0,0,0,.5)] [shape-outside:circle(50%)] max-[760px]:float-none max-[760px]:block max-[760px]:mx-auto max-[760px]:mt-0 max-[760px]:mb-5" />
+          <span class="capitalize font-bold">привет! (Privet! - Hello!) </span>I'm a Russian-Australian Designer, Developer & Content Creator based around Sydney, Australia.
+
            I treat interfaces the way Khokhloma
           masters treat wood: start with a dark, quiet ground, then apply ornament
           only where it earns its place. Most of my work lives at the front-end —
@@ -183,13 +291,23 @@ const craftColumns = [
           distance between a design file and a finished interface, and how much
           craft it takes to close it faithfully.
         </p>
-        <p>
+        <p class="mt-3.5">
+          I didn't start here. My first degree was a Master's in international
+          economics — reading systems, not building them. I retrained through a
+          web development immersive, then a Bachelor of Arts in Digital
+          Experience & Interaction Design, and picked up an Azure administrator
+          certification along the way. Since 2018 I've worked front-of-house and
+          back across agency and client sites in parking, mining, hospitality,
+          retail and more — different industries, same brief: make it considered,
+          not just functional.
+        </p>
+        <p class="mt-3.5">
           Outside client work I run an independent production label where I build
           everything myself end-to-end: a podcast platform on Next.js 15, a browser
           game in React, and a blog — my own three-panel folk triptych of code,
           film criticism and mischief.
         </p>
-        <p>
+        <p class="mt-3.5">
           The artwork on this page is drawn from a piece I painted myself — a
           traditional spoon in the Kudrina style: black field, crimson rosette,
           gold leaves, rowan berries.
@@ -201,34 +319,78 @@ const craftColumns = [
 
   <Divider phase="b" />
 
-  <!-- ── Selected Work ─────────────────────────────────────────────────── -->
-  <section id="work" class="wrap rise">
-    <h2>Selected Work</h2>
-    <p class="sub">Painted, fired, shipped</p>
-    <div class="cards">
-      {projects.map(p => (
+  <!-- ── Work ──────────────────────────────────────────────────────────── -->
+  <section id="work" class="rise max-w-265 mx-auto px-6 py-18">
+    <h2 class="font-display font-normal text-gold text-[clamp(1.5rem,3.6vw,2.1rem)] tracking-wider text-center mb-2">Work</h2>
+    <p class="sub text-center font-mono text-[.78rem] tracking-[.22em] uppercase text-ink-dim mb-9">Painted, fired, shipped</p>
+
+    <div id="work-all" class="work-filters flex justify-center gap-2.5 flex-wrap mb-9" role="tablist" aria-label="Filter work by role">
+      {workFilters.map(f => (
+        <button
+          type="button"
+          class="work-filter-pill font-mono text-[.72rem] tracking-[.12em] uppercase px-4 py-1.75 rounded-xs border border-hairline text-ink-dim transition-[border-color,color] duration-200 hover:text-gold hover:border-gold/50"
+          data-role={f.key}
+          role="tab"
+          aria-selected={f.key === 'all' ? 'true' : 'false'}
+        >{f.label}</button>
+      ))}
+    </div>
+
+    <!-- Featured projects sort first; the rest load in on demand -->
+    <div id="work-all-grid" class="cards grid grid-cols-3 gap-5.5 max-[880px]:grid-cols-1">
+      {sortedProjects.filter(p => p.featured).map(p => (
         <ProjectCard
           title={p.title}
           kind={p.kind}
           description={p.description}
           tags={p.tags}
+          roles={p.roles}
+          live={p.live}
+          github={p.github}
+          challenge={p.challenge}
+          image={p.image}
+          featured
+        />
+      ))}
+
+      <button
+        type="button"
+        id="work-load-more"
+        class="col-span-3 max-[880px]:col-span-1 justify-self-center font-mono text-[.78rem] tracking-[.14em] uppercase text-gold border border-gold/50 px-6 py-2.5 rounded-xs transition-colors hover:bg-gold hover:text-lacquer"
+      >Load more work ↓</button>
+
+      {sortedProjects.filter(p => !p.featured).map(p => (
+        <ProjectCard
+          title={p.title}
+          kind={p.kind}
+          description={p.description}
+          tags={p.tags}
+          roles={p.roles}
+          live={p.live}
+          github={p.github}
+          challenge={p.challenge}
+          image={p.image}
+          hidden
         />
       ))}
     </div>
+    <p id="work-empty" class="hidden text-center font-mono text-[.85rem] text-ink-dim mt-8">
+      Nothing filed under that craft yet.
+    </p>
   </section>
 
   <Divider phase="a" />
 
   <!-- ── Craft ─────────────────────────────────────────────────────────── -->
-  <section id="craft" class="wrap rise">
-    <h2>Craft</h2>
-    <p class="sub">Tools of the trade</p>
-    <div class="craft-grid">
+  <section id="craft" class="rise max-w-265 mx-auto px-6 py-18">
+    <h2 class="font-display font-normal text-gold text-[clamp(1.5rem,3.6vw,2.1rem)] tracking-wider text-center mb-2">Craft</h2>
+    <p class="sub text-center font-mono text-[.78rem] tracking-[.22em] uppercase text-ink-dim mb-11">Tools of the trade</p>
+    <div class="craft-grid grid grid-cols-3 gap-5.5 max-[880px]:grid-cols-1">
       {craftColumns.map(col => (
-        <div class="craft">
-          <h3>{col.heading}</h3>
-          <ul>
-            {col.items.map(item => <li>{item}</li>)}
+        <div class="craft border-t-2 border-crimson pt-4.5">
+          <h3 class="font-mono font-normal text-[.8rem] tracking-[.2em] uppercase text-gold mb-3">{col.heading}</h3>
+          <ul class="list-none">
+            {col.items.map(item => <li class="craft-li py-1.5 pl-5.5 relative text-[.96rem]">{item}</li>)}
           </ul>
         </div>
       ))}
@@ -238,10 +400,10 @@ const craftColumns = [
   <Divider phase="b" />
 
   <!-- ── Story ─────────────────────────────────────────────────────────── -->
-  <section id="story" class="wrap rise">
-    <h2>Khokhloma</h2>
-    <p class="sub">Folk art, rendered in code</p>
-    <div class="story-grid">
+  <section id="story" class="rise max-w-265 mx-auto px-6 py-18">
+    <h2 class="font-display font-normal text-gold text-[clamp(1.5rem,3.6vw,2.1rem)] tracking-wider text-center mb-2">Khokhloma</h2>
+    <p class="sub text-center font-mono text-[.78rem] tracking-[.22em] uppercase text-ink-dim mb-11">Folk art, rendered in code</p>
+    <div class="story-grid grid grid-cols-[1fr_240px] gap-13 items-start max-[760px]:grid-cols-1">
       <div class="story-prose">
         <p>
           Khokhloma is a Russian folk painting tradition from the 17th century, originating
@@ -252,16 +414,16 @@ const craftColumns = [
           lacquerware. The four colours — black, crimson, gold, green — have not changed
           in three centuries.
         </p>
-        <p>
+        <p class="mt-4">
           The style used here is Kudrina — a variation built on movement rather than
           pattern. Where standard Khokhloma fills the ground with isolated berries and
-          leaves, Kudrina composes a <em>kustik</em> (little bush): a central rosette
+          leaves, Kudrina composes a <em class="italic text-gold">kustik</em> (little bush): a central rosette
           anchoring spiralling vine tendrils, with rowan clusters appearing where the
           stems branch. It is a style with a strict painting order — vine framework first,
           then leaves, then the rosette, then the berries last. The SVG animation in the
           hero follows that exact sequence.
         </p>
-        <p>
+        <p class="mt-4">
           The ornament on this site is drawn directly from a spoon I painted by hand.
           Every hex value in the colour system is sampled from that physical piece:
           the lacquer ground, the rosette crimson, the leaf gold, the vine green.
@@ -272,26 +434,13 @@ const craftColumns = [
         </p>
       </div>
 
-      <!-- Spoon figure: replace src with photo/scan when available (§8 open item) -->
-      <figure class="spoon-fig">
-        <div class="spoon-placeholder" aria-hidden="true">
-          <svg viewBox="0 0 120 200" width="80" opacity=".4">
-            <ellipse cx="60" cy="42" rx="28" ry="32" fill="#0e0c08" stroke="#f0b31c" stroke-width="1.5"/>
-            <g fill="#e0272d">
-              <circle cx="60"   cy="30" r="5.5"/>
-              <circle cx="70"   cy="37" r="5.5"/>
-              <circle cx="70"   cy="49" r="5.5"/>
-              <circle cx="60"   cy="56" r="5.5"/>
-              <circle cx="50"   cy="49" r="5.5"/>
-              <circle cx="50"   cy="37" r="5.5"/>
-            </g>
-            <circle cx="60" cy="43" r="5.2" fill="#f0b31c"/>
-            <rect x="57" y="74" width="6" height="100" rx="3" fill="#0e0c08" stroke="#f0b31c" stroke-width="1"/>
-          </svg>
+      <figure class="spoon-fig relative text-center rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] px-5 pt-7 pb-5  max-[760px]:max-w-70 max-[760px]:mx-auto before:content-[''] before:absolute before:inset-1.5 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
+        <div class="flex justify-center pt-2 pb-2">
+          <img src="/spoon.png" alt="Hand-painted Khokhloma spoon in the Kudrina style: black field, crimson rosette, gold leaves, rowan berries" width="180" class="w-45 h-auto" loading="lazy" />
         </div>
-        <figcaption>
+        <figcaption class="font-mono text-[.72rem] tracking-[.06em] text-ink-dim leading-normal mt-3.5">
           The hand-painted Khokhloma spoon this site's ornament is based on.
-          <span class="fig-note">Photo coming soon.</span>
+          <span class="block mt-1 text-[.68rem]">Ornament art created in Adobe Illustrator by me, based on IRL spoon brought from birth country.</span>
         </figcaption>
       </figure>
     </div>
@@ -323,102 +472,63 @@ const craftColumns = [
       chip.classList.toggle('flipped');
     });
   });
+
+  // All Work filter: pills + hero-chip shortcuts both drive the same grid
+  const pills = document.querySelectorAll<HTMLButtonElement>('.work-filter-pill');
+  const cards = document.querySelectorAll<HTMLElement>('#work-all-grid [data-roles]');
+  const emptyMsg = document.getElementById('work-empty');
+  const loadMoreBtn = document.getElementById('work-load-more');
+
+  // Catalog cards render with the `.hidden` class until this fires — filtering
+  // or the button both need the full set loaded, so both funnel through here first.
+  function revealCatalog() {
+    cards.forEach(c => c.classList.remove('hidden'));
+    loadMoreBtn?.classList.add('hidden');
+  }
+
+  function currentFilter(): string {
+    const active = document.querySelector<HTMLButtonElement>('.work-filter-pill.active');
+    return active?.dataset.role ?? 'all';
+  }
+
+  function applyWorkFilter(role: string) {
+    pills.forEach(p => {
+      const active = p.dataset.role === role;
+      p.classList.toggle('active', active);
+      p.setAttribute('aria-selected', String(active));
+    });
+    let visible = 0;
+    cards.forEach(c => {
+      const roles = (c.dataset.roles ?? '').split(',');
+      const show = role === 'all' || roles.includes(role);
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyMsg?.classList.toggle('hidden', visible > 0);
+  }
+
+  loadMoreBtn?.addEventListener('click', () => {
+    revealCatalog();
+    applyWorkFilter(currentFilter());
+  });
+
+  pills.forEach(p => p.addEventListener('click', () => {
+    revealCatalog();
+    applyWorkFilter(p.dataset.role!);
+  }));
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-work-filter]').forEach(link => {
+    link.addEventListener('click', () => {
+      revealCatalog();
+      applyWorkFilter(link.dataset.workFilter!);
+    });
+  });
+
+  applyWorkFilter('all');
 </script>
 
 <style>
-  /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header {
-    text-align: center;
-    padding: 0 48px 44px;
-    position: relative;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% 38%,
-        rgba(240,179,28,.04) 0%,
-        rgba(200,120,12,.02) 40%,
-        transparent          70%),
-      radial-gradient(ellipse 40% 30% at 50% 22%,
-        rgba(240,179,28,.03) 0%,
-        transparent          100%);
-  }
-
-  /* Oval spoon-bowl frame: narrow, centered, taller than wide */
-  .hero-frame {
-    position: absolute;
-    top: 10px;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(420px, calc(100% - 48px));
-    border: 1px solid rgba(240,179,28,.12);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 2;
-    background: radial-gradient(
-      ellipse at 50% 50%,
-      rgba(8,10,20,.0)  0%,
-      rgba(8,10,20,.72) 60%,
-      rgba(6,8,18,.88)  100%
-    );
-    box-shadow:
-      0 0 0 1px rgba(240,179,28,.06),
-      0 20px 56px rgba(0,0,0,.55),
-      0 6px 20px rgba(0,0,0,.35),
-      inset 0 2px 4px rgba(240,179,28,.08),
-      inset 0 -2px 6px rgba(0,0,0,.4);
-  }
-  /* Inner crimson ring — double-border lacquerware convention */
-  .hero-frame::after {
-    content: "";
-    position: absolute;
-    inset: 9px;
-    border: 1px solid rgba(224,39,45,.22);
-    border-radius: 50%;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.25);
-  }
-
-  /* Spoon handle: sits between hero bottom and divider, visually anchors the oval bowl */
-  .hero-handle {
-    width: 6px;
-    height: 36px;
-    margin: 0 auto;
-    background: linear-gradient(to bottom, rgba(240,179,28,.55), rgba(240,179,28,.22));
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 6px 16px rgba(0,0,0,.4), 0 2px 6px rgba(0,0,0,.3);
-  }
-
-  /* Cardinal-point accents sit on the oval border line */
-  .hf-dot { position: absolute; }
-  .hf-dot.top    { top: -7px;  left: 50%; transform: translateX(-50%); }
-  .hf-dot.bottom { bottom: -7px; left: 50%; transform: translateX(-50%); }
-  .hf-dot.left   { left: -5px; top: 50%; transform: translateY(-50%); }
-  .hf-dot.right  { right: -5px; top: 50%; transform: translateY(-50%); }
-
-  h1 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    font-size: clamp(2.6rem, 7vw, 4.4rem);
-    color: var(--color-gold);
-    letter-spacing: .05em;
-    line-height: 1.05;
-    text-shadow: 0 0 26px rgba(240,179,28,.22);
-  }
-
-  .hero-surname {
-    font-family: var(--font-display);
-    font-size: clamp(1.1rem, 2.8vw, 1.55rem);
-    color: var(--color-ink-dim);
-    letter-spacing: .08em;
-    margin-top: -6px;
-  }
-
-  /* Vine arrows from name → cards */
-  .role-vines {
-    display: block;
-    width: min(600px, 100%);
-    height: 88px;
-    margin: 6px auto 0;
-    overflow: visible;
-  }
+  /* ── Hero: vine-arrow draw sequence ────────────────────────────────────── */
   .rv-stem {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
@@ -446,31 +556,8 @@ const craftColumns = [
     animation: bloom .4s ease forwards 1.7s;
   }
 
-  /* Role chips: full-width row, cards share available space equally */
-  .hero-roles {
-    display: flex;
-    justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
-    margin-top: 0;
-    width: 100%;
-  }
-
-  /* ── Flip cards ─────────────────────────────────────────────────────── */
-  .role-chip {
-    perspective: 900px;
-    flex: 1 1 0;
-    min-width: 140px;
-    max-width: 240px;
-    height: 240px;
-    cursor: pointer;
-  }
-
+  /* ── Flip cards: hover/tap toggles the 3D rotation ─────────────────────── */
   .chip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
     transition: transform .55s cubic-bezier(.4,0,.2,1);
   }
   .role-chip:hover .chip-inner,
@@ -478,98 +565,16 @@ const craftColumns = [
     transform: rotateY(180deg);
   }
 
-  .chip-front,
-  .chip-back {
-    position: absolute;
-    inset: 0;
-    border-radius: 4px;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px 20px 18px;
-  }
-
-  /* Front: dark lacquer with gold keyline */
-  .chip-front {
-    background: var(--color-lacquer-soft);
-  }
-  .chip-front::before {
-    content: "";
-    position: absolute;
-    inset: 7px;
-    border: 1px solid rgba(240,179,28,.14);
-    border-radius: 2px;
-    pointer-events: none;
-  }
-  .chip-front span {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    letter-spacing: .05em;
-    color: var(--color-gold);
-  }
+  /* Cross-component override: icons render at a fixed height inside the chip */
   .chip-front :global(.spoons),
   .chip-front :global(.chip-icon) {
     height: 88px;
     width: auto;
-  }
-
-  /* Back: gold gradient — same as contact panel */
-  .chip-back {
-    background: linear-gradient(165deg, #f4bc27 0%, #e8a70f 55%, #cf920c 100%);
-    transform: rotateY(180deg);
-    gap: 8px;
-  }
-  .chip-back::before {
-    content: "";
-    position: absolute;
-    inset: 8px;
-    border: 1.5px solid rgba(14,12,8,.4);
-    border-radius: 2px;
-    pointer-events: none;
-  }
-  .cb-title {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    color: var(--color-lacquer);
-    letter-spacing: .05em;
-  }
-  .cb-skills {
-    font-family: var(--font-mono);
-    font-size: .72rem;
-    letter-spacing: .06em;
-    color: #4d3c08;
-    line-height: 1.7;
-    text-align: center;
-  }
-  .cb-cta {
-    margin-top: 6px;
-    font-family: var(--font-mono);
-    font-size: .72rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--color-lacquer);
-    border: 1px solid rgba(14,12,8,.5);
-    padding: 7px 14px;
-    border-radius: 2px;
-    transition: background .2s, color .2s;
-  }
-  .cb-cta:hover {
-    background: var(--color-lacquer);
-    color: var(--color-gold);
+    margin-bottom: 0;
   }
 
   /* Tap hint: touch-only devices, hidden on hover-capable screens */
-  .chip-tap {
-    display: none;
-    font-family: var(--font-body);
-    font-size: .72rem;
-    letter-spacing: .04em;
-    color: var(--color-ink-dim);
-    opacity: .7;
-  }
+  .chip-tap { display: none; }
   @media (hover: none) {
     .chip-tap { display: block; }
     .role-chip.flipped .chip-tap { display: none; }
@@ -579,154 +584,15 @@ const craftColumns = [
     .chip-inner { transition: none; }
   }
 
-  .hero-line {
-    max-width: 560px;
-    margin: 20px auto 0;
-    color: var(--color-ink-dim);
-    font-size: 1.02rem;
-  }
-
-  .hero-cta {
-    display: inline-block;
-    margin-top: 30px;
-    font-family: var(--font-mono);
-    font-size: .85rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
+  /* ── Work filter pills ──────────────────────────────────────────────── */
+  .work-filter-pill.active {
     color: var(--color-lacquer);
     background: var(--color-gold);
-    border: 1px solid var(--color-gold-deep);
-    padding: 12px 30px;
-    border-radius: 2px;
-    transition: background .25s, color .25s, border-color .25s;
-  }
-  .hero-cta:hover {
-    background: transparent;
     border-color: var(--color-gold-deep);
-    color: var(--color-gold);
   }
 
-  /* ── About ────────────────────────────────────────────────────────────── */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 44px;
-    align-items: start;
-  }
-  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
-  .about-grid p + p { margin-top: 14px; }
-
-  .avatar {
-    float: left;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 4px 22px 12px 0;
-    border: 2px solid rgba(240,179,28,.45);
-    box-shadow:
-      0 0 0 4px rgba(240,179,28,.08),
-      0 8px 24px rgba(0,0,0,.5);
-    shape-outside: circle(50%);
-  }
-  @media (max-width: 760px) {
-    .avatar {
-      float: none;
-      display: block;
-      margin: 0 auto 20px;
-    }
-  }
-
-  /* ── Work cards ───────────────────────────────────────────────────────── */
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-  }
-  @media (max-width: 880px) { .cards { grid-template-columns: 1fr; } }
-
-  /* ── Craft ────────────────────────────────────────────────────────────── */
-  .craft-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-  }
-  @media (max-width: 880px) { .craft-grid { grid-template-columns: 1fr; } }
-
-  /* ── Story ───────────────────────────────────────────────────────────── */
-  .story-grid {
-    display: grid;
-    grid-template-columns: 1fr 240px;
-    gap: 52px;
-    align-items: start;
-  }
-  @media (max-width: 760px) { .story-grid { grid-template-columns: 1fr; } }
-
-  .story-prose p + p { margin-top: 16px; }
-  .story-prose em {
-    font-style: italic;
-    color: var(--color-gold);
-  }
-
-  .spoon-fig {
-    border: 1px solid var(--color-hairline);
-    border-radius: 4px;
-    background: var(--color-lacquer-soft);
-    padding: 28px 20px 20px;
-    text-align: center;
-    position: relative;
-  }
-  .spoon-fig::before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border: 1px solid rgba(224,39,45,.18);
-    border-radius: 2px;
-    pointer-events: none;
-  }
-  .spoon-placeholder {
-    display: flex;
-    justify-content: center;
-    padding: 16px 0 8px;
-  }
-  figcaption {
-    font-family: var(--font-mono);
-    font-size: .72rem;
-    letter-spacing: .06em;
-    color: var(--color-ink-dim);
-    line-height: 1.5;
-    margin-top: 14px;
-  }
-  .fig-note {
-    display: block;
-    color: var(--color-green-vine);
-    margin-top: 4px;
-    font-size: .68rem;
-  }
-
-  @media (max-width: 760px) {
-    .spoon-fig { max-width: 280px; margin: 0 auto; }
-  }
-
-  .craft { border-top: 2px solid var(--color-crimson); padding-top: 18px; }
-
-  .craft h3 {
-    font-family: var(--font-mono);
-    font-weight: 400;
-    font-size: .8rem;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    color: var(--color-gold);
-    margin-bottom: 12px;
-  }
-
-  .craft ul { list-style: none; }
-  .craft li {
-    padding: 6px 0 6px 22px;
-    position: relative;
-    font-size: .96rem;
-  }
-  .craft li::before {
+  /* ── Craft bullets: alternating crimson/gold dots ──────────────────────── */
+  .craft .craft-li::before {
     content: "";
     position: absolute;
     left: 2px;
@@ -736,5 +602,5 @@ const craftColumns = [
     border-radius: 50%;
     background: var(--color-crimson);
   }
-  .craft li:nth-child(even)::before { background: var(--color-gold); }
+  .craft .craft-li:nth-child(even)::before { background: var(--color-gold); }
 </style>
