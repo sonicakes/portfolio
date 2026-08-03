@@ -14,6 +14,11 @@
   --color-ink-dim: #b8a878;
   --color-hairline: rgba(240, 179, 28, 0.28);
 
+  /* Brightened variants of crimson/green-vine for small text on dark grounds —
+     the base swatches read fine as fills/borders but fall short of 4.5:1 as text. */
+  --color-crimson-text: #ef4e54;
+  --color-green-vine-text: #6fae4a;
+
   /* §2.2 Font families */
   --font-display: 'Ruslan Display', cursive;
   --font-body: 'PT Sans', sans-serif;

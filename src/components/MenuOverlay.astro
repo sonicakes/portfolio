@@ -4,7 +4,7 @@
 // Escape closes; scroll locked while open; all ARIA on burger handled here.
 ---
 
-<div class="menu-overlay fixed inset-0 z-110 bg-[rgba(14,12,8,.97)] flex items-center justify-center" id="menu" role="dialog" aria-label="Site menu">
+<div class="menu-overlay fixed inset-0 z-110 bg-[rgba(14,12,8,.97)] flex items-center justify-center" id="menu" role="dialog" aria-modal="true" aria-label="Site menu" inert>
 
   <!-- Left-edge vine: draws top-to-bottom on each open -->
   <svg class="menu-vine absolute left-[clamp(14px,6vw,80px)] top-0 h-full w-[60px]" viewBox="0 0 60 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -49,18 +49,28 @@
   const burger  = document.querySelector<HTMLButtonElement>('.burger')!;
   const overlay = document.getElementById('menu')!;
 
-  function setMenu(open: boolean) {
+  // `restoreFocus` is false for nav-link clicks, since the browser's own hash
+  // navigation should own focus there instead of snapping it back to the burger.
+  function setMenu(open: boolean, restoreFocus = true) {
     overlay.classList.toggle('open', open);
+    overlay.toggleAttribute('inert', !open);
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.style.overflow = open ? 'hidden' : '';
+    if (open) {
+      overlay.querySelector<HTMLButtonElement>('.menu-close')!.focus();
+    } else if (restoreFocus) {
+      burger.focus();
+    }
   }
 
   burger.addEventListener('click', () => setMenu(!overlay.classList.contains('open')));
   const closeBtn = overlay.querySelector<HTMLButtonElement>('.menu-close')!;
   closeBtn.addEventListener('click', () => setMenu(false));
-  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false, false)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) setMenu(false);
+  });
 </script>
 
 <style>

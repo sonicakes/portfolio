@@ -2,6 +2,7 @@
 import Nav from '../components/Nav.astro';
 import MenuOverlay from '../components/MenuOverlay.astro';
 import SideVines from '../components/SideVines.astro';
+import BackToTop from '../components/BackToTop.astro';
 import '../styles/theme.css';
 
 interface Props {
@@ -31,14 +32,19 @@ const {
   />
 </head>
 <body class="bg-lacquer text-ink-cream font-body text-[17px] leading-[1.65] antialiased px-0 min-[820px]:px-[52px]">
+  <a href="#main-content" class="skip-link fixed top-2 left-2 z-[200] -translate-y-24 focus:translate-y-0 bg-gold text-lacquer font-mono text-[.85rem] tracking-[.08em] uppercase px-4 py-2.5 rounded-xs transition-transform duration-200">Skip to content</a>
   <SideVines />
   <Nav />
   <MenuOverlay />
 
-  <slot />
+  <main id="main-content">
+    <slot />
+  </main>
 
   <footer class="text-center px-6 pt-8.5 pb-10.5 text-ink-dim font-mono text-[.75rem] tracking-[.12em] border-t border-hairline">
     <span lang="ru">Расписано вручную</span> · © 2026 Sonia Parker
   </footer>
+
+  <BackToTop />
 </body>
 </html>
