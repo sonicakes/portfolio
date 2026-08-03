@@ -9,6 +9,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 import FactPanel from '../components/FactPanel.astro';
 import ContactPanel from '../components/ContactPanel.astro';
 
+// `roles` drive the Work filter pills; `featured` sorts a project first and gives it the larger card treatment.
+// `github` / `image` are left blank for pieces still awaiting links & screenshots.
 const projects = [
   {
     title: 'Kino Royale',
@@ -16,30 +18,135 @@ const projects = [
     description:
       'Full production site for an independent film-criticism podcast: git-backed CMS, custom RSS feed endpoint, zero-egress audio delivery, and a bespoke design system with strict token rules.',
     tags: ['Next.js 15', 'TypeScript', 'Tailwind v4', 'Decap CMS', 'Cloudflare R2'],
-  },
-  {
-    title: 'Royal Simulator',
-    kind: 'Browser game',
-    description:
-      'A darkly comic choose-your-fate horror game with a large library of authored scenarios driven from a single JSON data file, styled after Polish film posters.',
-    tags: ['React', 'Vite', 'TypeScript', 'Tailwind v4', 'Netlify'],
+    roles: ['dev', 'content'],
+    featured: true,
+    live: 'https://kinoroyale.net',
+    github: '',
+    image: '/projs/kino-royale-pod.png',
   },
   {
     title: 'Cinefile Blog',
     kind: 'Publication',
     description:
       'A film review publication built and operated end-to-end: custom domain and DNS, static delivery, and long-form criticism with proper Chicago-style citations.',
-    tags: ['Static site', 'Netlify', 'Custom DNS', 'Editorial design'],
+    tags: ['Strapi Headless CMS', 'Neon Postgres', 'Custom DNS', 'Editorial design'],
+    roles: ['content', 'dev'],
+    featured: true,
+    live: 'https://cinefileblog.com',
+    github: '',
+    image: '/projs/cinefile-blog.png',
+  },
+  {
+    title: 'Royal Simulator',
+    kind: 'Browser game',
+    description:
+      'A darkly comic choose-your-fate horror game with a large library of authored scenarios driven from a single JSON data file, styled after Polish film posters.',
+    tags: ['React', 'React Router v7', 'TypeScript', 'Tailwind v4', 'Netlify'],
+    roles: ['dev', 'design'],
+    featured: true,
+    live: 'https://royal-simulator.netlify.app/',
+    github: '',
+    image: '/projs/royal-simulator-poster.png',
+  },
+  {
+    title: 'Film Lady Productions',
+    kind: 'Studio site',
+    description:
+      'The home base for my independent production label — "a court of cinema, criticism & controlled chaos" tying together Kino Royale, Cinefile Blog and other self-directed work under one identity.',
+    tags: ['Gatsby 5', 'Tailwind v4', 'Typescript', 'GSAP'],
+    roles: ['dev', 'content', 'design'],
+    featured: false,
+    live: 'https://filmladyproductions.netlify.app/',
+    github: '',
+    image: '/projs/filmladyprods.png',
+  },
+  {
+    title: 'Launch Countdown Timer',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A live countdown to a rocket launch date — days, hours, minutes and seconds ticking down with responsive layout and hover states, built to match the challenge design file.',
+    tags: ['React', 'Vite'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://cakes-countdown.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-',
+    image: '',
+  },
+  {
+    title: 'Product List with Cart',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A dessert menu that builds a live shopping cart as items are added — quantity controls, running total, and a confirmation state on order.',
+    tags: ['React', 'Vite'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://dez-cart-react.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d',
+    image: '',
+  },
+  {
+    title: 'Interactive Rating Component',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A star-rating widget with selectable states and a submitted-confirmation view, built to spec for interaction and accessibility.',
+    tags: ['React', 'Vite'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://rating-cakes-component.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/interactive-rating-component-koxpeBUmI',
+    image: '',
+  },
+  {
+    title: 'Weather App',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A weather lookup app pulling live forecast data by location, with unit toggling and responsive loading/error states.',
+    tags: ['React', 'Vite', 'Weather API'],
+    roles: ['dev'],
+    featured: false,
+    live: 'https://weather-cakes.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49',
+    image: '',
+  },
+  {
+    title: 'Space Tourism',
+    kind: 'Frontend Mentor challenge',
+    description:
+      'A multi-page space-tourism site with per-page layout and typography shifts across breakpoints — Frontend Mentor\'s most detailed responsive design brief.',
+    tags: ['React Router', 'Vite', 'Tailwind CSS'],
+    roles: ['design', 'dev'],
+    featured: false,
+    live: 'https://space-tourism-cakes.netlify.app/',
+    github: '',
+    challenge: 'https://www.frontendmentor.io/challenges/space-tourism-multipage-website-gRWj1URZ3',
+    image: '',
   },
 ];
 
+// Featured projects sort first but stay mixed into the same filterable grid.
+const sortedProjects = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
+
+const workFilters = [
+  { key: 'all',     label: 'All' },
+  { key: 'design',  label: 'Design' },
+  { key: 'dev',     label: 'Dev' },
+  { key: 'content', label: 'Content' },
+];
+
 const facts = [
-  { label: 'Base',       value: 'Sydney, Australia' },
-  { label: 'Origins',    value: 'Russian-born, Australian-made.' },
-  { label: 'Experience', value: '6+ years professional' },
-  { label: 'Cloud',      value: 'Azure certified (AZ-104)' },
-  { label: 'Languages',  value: 'Russian · English · French · Spanish' },
-  { label: 'Off-duty',   value: 'Film criticism, folk art, one Labrador' },
+  { label: 'Base',            value: 'Sydney, Australia' },
+  { label: 'Origins',         value: 'The Town of N, Russia' },
+  { label: 'Experience',      value: '7+ years professional' },
+  { label: 'Education',       value: "Curtin Uni, AU '23 · BA in Digital Design & Interaction" },
+  { label: 'Cloud',           value: 'Azure certified (AZ-104)' },
+  { label: 'Focus',           value: 'Front-end dev, UI/UX & Creative' },
+  { label: 'Methodology',     value: 'Agile/Scrum · Code review & QA' },
+  { label: 'Human Languages', value: 'RU (native) · EN (fluent) · FR/ES (working) · TH (basic)' },
+  { label: 'Off-duty',        value: 'Cinephile · Cynophile · Bibliophile · Linguaphile' },
 ];
 
 const craftColumns = [
@@ -47,30 +154,31 @@ const craftColumns = [
     heading: 'Front of house',
     items: [
       'TypeScript & modern JavaScript',
-      'React & Next.js',
-      'Vue.js',
+      'React, Next.js & Vue.js',
       'Tailwind CSS & design tokens',
+      'Figma, Adobe XD & InVision',
+      'Adobe Suite & Canva',
       'Accessible, responsive UI',
     ],
   },
   {
     heading: 'Back of house',
     items: [
-      'C# / .NET',
-      'Node.js',
-      'PostgreSQL (Neon)',
-      'Headless & git-backed CMS',
+      'C# / .NET & Blazor',
+      'Sitecore, Kentico & Umbraco',
+      'Shopify, WordPress & Strapi',
+      'Node.js & PostgreSQL (Neon)',
       'REST APIs & RSS pipelines',
     ],
   },
   {
     heading: 'Workshop',
     items: [
-      'Azure — certified administrator',
-      'AWS & Cloudflare',
-      'Netlify CI/CD',
-      'Database migrations',
-      'Audio production tooling',
+      'Azure — certified administrator (AZ-104)',
+      'Netlify, Vercel & Cloudflare',
+      'Railway & Render',
+      'GitHub & CI/CD pipelines',
+      'Claude Code & AI-assisted workflows',
     ],
   },
 ];
@@ -124,7 +232,7 @@ const craftColumns = [
           <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
             <span class="font-display text-base text-lacquer tracking-wider">Digital Designer</span>
             <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">UI/UX · Design systems<br/>Figma → production code</p>
-            <a href="#work" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See design work</a>
+            <a href="#work-all" data-work-filter="design" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See design work</a>
           </div>
         </div>
       </div>
@@ -137,8 +245,8 @@ const craftColumns = [
           </div>
           <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
             <span class="font-display text-base text-lacquer tracking-wider">Front-End Dev</span>
-            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Vue · React · TypeScript<br/>Tailwind · design tokens</p>
-            <a href="#work" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See dev projects</a>
+            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Vue · React · TypeScript<br/>Tailwind · CSS</p>
+            <a href="#work-all" data-work-filter="dev" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See dev projects</a>
           </div>
         </div>
       </div>
@@ -151,14 +259,14 @@ const craftColumns = [
           </div>
           <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
             <span class="font-display text-base text-lacquer tracking-wider">Content Creator</span>
-            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Film criticism · Podcast<br/>Editorial · Production</p>
-            <a href="#work" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See content work</a>
+            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Kino Royale Podcast · <br/>The Cinefile Blog · Production</p>
+            <a href="#work-all" data-work-filter="content" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See content work</a>
           </div>
         </div>
       </div>
     </div>
 
-    <a class="hero-cta inline-block mt-7.5 font-mono text-[.85rem] tracking-[.12em] uppercase text-lacquer bg-gold border border-gold-deep px-7.5 py-3 rounded-xs transition-[background,color,border-color] duration-250 hover:bg-transparent hover:border-gold-deep hover:text-gold" href="#work">See all work</a>
+    <a class="hero-cta inline-block mt-7.5 font-mono text-[.85rem] tracking-[.12em] uppercase text-lacquer bg-gold border border-gold-deep px-7.5 py-3 rounded-xs transition-[background,color,border-color] duration-250 hover:bg-transparent hover:border-gold-deep hover:text-gold" href="#work-all">See all work</a>
   </header>
   <!-- Spoon handle: flow element between bowl and divider -->
   <div class="w-1.5 h-9 mx-auto rounded-b bg-[linear-gradient(to_bottom,rgba(240,179,28,.55),rgba(240,179,28,.22))] shadow-[0_6px_16px_rgba(0,0,0,.4),0_2px_6px_rgba(0,0,0,.3)]" aria-hidden="true"></div>
@@ -184,6 +292,16 @@ const craftColumns = [
           craft it takes to close it faithfully.
         </p>
         <p class="mt-3.5">
+          I didn't start here. My first degree was a Master's in international
+          economics — reading systems, not building them. I retrained through a
+          web development immersive, then a Bachelor of Arts in Digital
+          Experience & Interaction Design, and picked up an Azure administrator
+          certification along the way. Since 2018 I've worked front-of-house and
+          back across agency and client sites in parking, mining, hospitality,
+          retail and more — different industries, same brief: make it considered,
+          not just functional.
+        </p>
+        <p class="mt-3.5">
           Outside client work I run an independent production label where I build
           everything myself end-to-end: a podcast platform on Next.js 15, a browser
           game in React, and a blog — my own three-panel folk triptych of code,
@@ -201,20 +319,64 @@ const craftColumns = [
 
   <Divider phase="b" />
 
-  <!-- ── Selected Work ─────────────────────────────────────────────────── -->
+  <!-- ── Work ──────────────────────────────────────────────────────────── -->
   <section id="work" class="rise max-w-265 mx-auto px-6 py-18">
-    <h2 class="font-display font-normal text-gold text-[clamp(1.5rem,3.6vw,2.1rem)] tracking-wider text-center mb-2">Selected Work</h2>
-    <p class="sub text-center font-mono text-[.78rem] tracking-[.22em] uppercase text-ink-dim mb-11">Painted, fired, shipped</p>
-    <div class="cards grid grid-cols-3 gap-5.5 max-[880px]:grid-cols-1">
-      {projects.map(p => (
+    <h2 class="font-display font-normal text-gold text-[clamp(1.5rem,3.6vw,2.1rem)] tracking-wider text-center mb-2">Work</h2>
+    <p class="sub text-center font-mono text-[.78rem] tracking-[.22em] uppercase text-ink-dim mb-9">Painted, fired, shipped</p>
+
+    <div id="work-all" class="work-filters flex justify-center gap-2.5 flex-wrap mb-9" role="tablist" aria-label="Filter work by role">
+      {workFilters.map(f => (
+        <button
+          type="button"
+          class="work-filter-pill font-mono text-[.72rem] tracking-[.12em] uppercase px-4 py-1.75 rounded-xs border border-hairline text-ink-dim transition-[border-color,color] duration-200 hover:text-gold hover:border-gold/50"
+          data-role={f.key}
+          role="tab"
+          aria-selected={f.key === 'all' ? 'true' : 'false'}
+        >{f.label}</button>
+      ))}
+    </div>
+
+    <!-- Featured projects sort first; the rest load in on demand -->
+    <div id="work-all-grid" class="cards grid grid-cols-3 gap-5.5 max-[880px]:grid-cols-1">
+      {sortedProjects.filter(p => p.featured).map(p => (
         <ProjectCard
           title={p.title}
           kind={p.kind}
           description={p.description}
           tags={p.tags}
+          roles={p.roles}
+          live={p.live}
+          github={p.github}
+          challenge={p.challenge}
+          image={p.image}
+          featured
+        />
+      ))}
+
+      <button
+        type="button"
+        id="work-load-more"
+        class="col-span-3 max-[880px]:col-span-1 justify-self-center font-mono text-[.78rem] tracking-[.14em] uppercase text-gold border border-gold/50 px-6 py-2.5 rounded-xs transition-colors hover:bg-gold hover:text-lacquer"
+      >Load more work ↓</button>
+
+      {sortedProjects.filter(p => !p.featured).map(p => (
+        <ProjectCard
+          title={p.title}
+          kind={p.kind}
+          description={p.description}
+          tags={p.tags}
+          roles={p.roles}
+          live={p.live}
+          github={p.github}
+          challenge={p.challenge}
+          image={p.image}
+          hidden
         />
       ))}
     </div>
+    <p id="work-empty" class="hidden text-center font-mono text-[.85rem] text-ink-dim mt-8">
+      Nothing filed under that craft yet.
+    </p>
   </section>
 
   <Divider phase="a" />
@@ -272,26 +434,13 @@ const craftColumns = [
         </p>
       </div>
 
-      <!-- Spoon figure: replace src with photo/scan when available (§8 open item) -->
       <figure class="spoon-fig relative text-center rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] px-5 pt-7 pb-5  max-[760px]:max-w-70 max-[760px]:mx-auto before:content-[''] before:absolute before:inset-1.5 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
-        <div class="flex justify-center pt-4 pb-2" aria-hidden="true">
-          <svg viewBox="0 0 120 200" width="80" opacity=".4">
-            <ellipse cx="60" cy="42" rx="28" ry="32" fill="#0e0c08" stroke="#f0b31c" stroke-width="1.5"/>
-            <g fill="#e0272d">
-              <circle cx="60"   cy="30" r="5.5"/>
-              <circle cx="70"   cy="37" r="5.5"/>
-              <circle cx="70"   cy="49" r="5.5"/>
-              <circle cx="60"   cy="56" r="5.5"/>
-              <circle cx="50"   cy="49" r="5.5"/>
-              <circle cx="50"   cy="37" r="5.5"/>
-            </g>
-            <circle cx="60" cy="43" r="5.2" fill="#f0b31c"/>
-            <rect x="57" y="74" width="6" height="100" rx="3" fill="#0e0c08" stroke="#f0b31c" stroke-width="1"/>
-          </svg>
+        <div class="flex justify-center pt-2 pb-2">
+          <img src="/spoon.png" alt="Hand-painted Khokhloma spoon in the Kudrina style: black field, crimson rosette, gold leaves, rowan berries" width="180" class="w-45 h-auto" loading="lazy" />
         </div>
         <figcaption class="font-mono text-[.72rem] tracking-[.06em] text-ink-dim leading-normal mt-3.5">
           The hand-painted Khokhloma spoon this site's ornament is based on.
-          <span class="fig-note block text-green-vine mt-1 text-[.68rem]">Photo coming soon.</span>
+          <span class="block mt-1 text-[.68rem]">Ornament art created in Adobe Illustrator by me, based on IRL spoon brought from birth country.</span>
         </figcaption>
       </figure>
     </div>
@@ -323,6 +472,59 @@ const craftColumns = [
       chip.classList.toggle('flipped');
     });
   });
+
+  // All Work filter: pills + hero-chip shortcuts both drive the same grid
+  const pills = document.querySelectorAll<HTMLButtonElement>('.work-filter-pill');
+  const cards = document.querySelectorAll<HTMLElement>('#work-all-grid [data-roles]');
+  const emptyMsg = document.getElementById('work-empty');
+  const loadMoreBtn = document.getElementById('work-load-more');
+
+  // Catalog cards render with the `.hidden` class until this fires — filtering
+  // or the button both need the full set loaded, so both funnel through here first.
+  function revealCatalog() {
+    cards.forEach(c => c.classList.remove('hidden'));
+    loadMoreBtn?.classList.add('hidden');
+  }
+
+  function currentFilter(): string {
+    const active = document.querySelector<HTMLButtonElement>('.work-filter-pill.active');
+    return active?.dataset.role ?? 'all';
+  }
+
+  function applyWorkFilter(role: string) {
+    pills.forEach(p => {
+      const active = p.dataset.role === role;
+      p.classList.toggle('active', active);
+      p.setAttribute('aria-selected', String(active));
+    });
+    let visible = 0;
+    cards.forEach(c => {
+      const roles = (c.dataset.roles ?? '').split(',');
+      const show = role === 'all' || roles.includes(role);
+      c.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    emptyMsg?.classList.toggle('hidden', visible > 0);
+  }
+
+  loadMoreBtn?.addEventListener('click', () => {
+    revealCatalog();
+    applyWorkFilter(currentFilter());
+  });
+
+  pills.forEach(p => p.addEventListener('click', () => {
+    revealCatalog();
+    applyWorkFilter(p.dataset.role!);
+  }));
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-work-filter]').forEach(link => {
+    link.addEventListener('click', () => {
+      revealCatalog();
+      applyWorkFilter(link.dataset.workFilter!);
+    });
+  });
+
+  applyWorkFilter('all');
 </script>
 
 <style>
@@ -380,6 +582,13 @@ const craftColumns = [
 
   @media (prefers-reduced-motion: reduce) {
     .chip-inner { transition: none; }
+  }
+
+  /* ── Work filter pills ──────────────────────────────────────────────── */
+  .work-filter-pill.active {
+    color: var(--color-lacquer);
+    background: var(--color-gold);
+    border-color: var(--color-gold-deep);
   }
 
   /* ── Craft bullets: alternating crimson/gold dots ──────────────────────── */
