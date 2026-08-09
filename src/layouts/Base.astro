@@ -10,7 +10,7 @@ interface Props {
   description?: string;
 }
 const {
-  title       = 'Sonia — Developer · Khokhloma Portfolio',
+  title       = 'Sonia Parker - Portfolio',
   description = 'Front-end & full-stack developer. TypeScript, Vue, React, C#. Portfolio painted in the black lacquer, crimson and gold of Khokhloma folk art.',
 } = Astro.props;
 ---
@@ -22,6 +22,7 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content={description}/>
   <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 
   <!-- Google Fonts: Ruslan Display (display), PT Sans (body), PT Mono (utility) -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
