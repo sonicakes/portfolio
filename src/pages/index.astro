@@ -191,47 +191,23 @@ const craftColumns = [
     </svg>
 
     <div class="hero-roles flex justify-center gap-7 flex-wrap mt-0 w-full max-[620px]:flex-col max-[620px]:items-center">
-      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
-        <div class="chip-inner relative w-full h-full transform-3d">
-          <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
-            <ChipFlower />
-            <span class="font-display text-base tracking-wider text-gold">Digital Designer</span>
-            <span class="chip-tap font-body text-[.72rem] tracking-[.04em] text-ink-dim opacity-70" aria-hidden="true">Tap to reveal</span>
-          </div>
-          <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
-            <span class="font-display text-base text-lacquer tracking-wider">Digital Designer</span>
-            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">UI/UX · Design systems<br/>Figma → production code</p>
-            <a href="#work-all" data-work-filter="design" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See design work</a>
-          </div>
-        </div>
+      <div class="role-chip relative flex-1 min-w-35 max-w-60 min-h-60 flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-5 rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] transition-transform duration-200 hover:-translate-y-1 before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
+        <ChipFlower />
+        <span class="font-display text-base tracking-wider text-gold">Digital Designer</span>
+        <p class="font-mono text-[.72rem] tracking-[.06em] text-ink-dim leading-[1.6] text-center">UI/UX Design · <br/>Accessible, Creative Interfaces</p>
+        <a href="#work-all" data-work-filter="design" class="mt-1 font-mono text-[.7rem] tracking-widest uppercase text-gold border border-gold/40 px-3.5 py-1.5 rounded-xs transition-[background,color] duration-200 hover:bg-gold hover:text-lacquer">See design work</a>
       </div>
-      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
-        <div class="chip-inner relative w-full h-full transform-3d">
-          <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
-            <Spoons />
-            <span class="font-display text-base tracking-wider text-gold">Front-End Dev</span>
-            <span class="chip-tap font-body text-[.72rem] tracking-[.04em] text-ink-dim opacity-70" aria-hidden="true">Tap to reveal</span>
-          </div>
-          <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
-            <span class="font-display text-base text-lacquer tracking-wider">Front-End Dev</span>
-            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Vue · React · TypeScript<br/>Tailwind · CSS</p>
-            <a href="#work-all" data-work-filter="dev" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See dev projects</a>
-          </div>
-        </div>
+      <div class="role-chip relative flex-1 min-w-35 max-w-60 min-h-60 flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-5 rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] transition-transform duration-200 hover:-translate-y-1 before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
+        <Spoons />
+        <span class="font-display text-base tracking-wider text-gold">Front-End Dev</span>
+        <p class="font-mono text-[.72rem] tracking-[.06em] text-ink-dim leading-[1.6] text-center">Vue/React/TS · CSS<br/>Design Systems ·<br/>AI-Driven Workflows</p>
+        <a href="#work-all" data-work-filter="dev" class="mt-1 font-mono text-[.7rem] tracking-widest uppercase text-gold border border-gold/40 px-3.5 py-1.5 rounded-xs transition-[background,color] duration-200 hover:bg-gold hover:text-lacquer">See dev projects</a>
       </div>
-      <div class="role-chip perspective-[900px] flex-1 min-w-35 max-w-60 h-60 cursor-pointer max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
-        <div class="chip-inner relative w-full h-full transform-3d">
-          <div class="chip-front absolute inset-0 rounded border border-hairline backface-hidden flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-4.5 bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none">
-            <ChipBerry />
-            <span class="font-display text-base tracking-wider text-gold">Content Creator</span>
-            <span class="chip-tap font-body text-[.72rem] tracking-[.04em] text-ink-dim opacity-70" aria-hidden="true">Tap to reveal</span>
-          </div>
-          <div class="chip-back absolute inset-0 rounded backface-hidden flex flex-col items-center justify-center gap-2 px-5 pt-5 pb-4.5 transform-[rotateY(180deg)] bg-[linear-gradient(165deg,#f4bc27_0%,#e8a70f_55%,#cf920c_100%)] before:content-[''] before:absolute before:inset-2 before:rounded-xs before:border-[1.5px] before:border-lacquer/40 before:pointer-events-none">
-            <span class="font-display text-base text-lacquer tracking-wider">Content Creator</span>
-            <p class="font-mono text-[.72rem] tracking-[.06em] text-[#4d3c08] leading-[1.7] text-center">Kino Royale Podcast · <br/>The Cinefile Blog · Production</p>
-            <a href="#work-all" data-work-filter="content" class="mt-1.5 font-mono text-[.72rem] tracking-widest uppercase text-lacquer border border-lacquer/50 px-3.5 py-1.75 rounded-xs transition-[background,color] duration-200 hover:bg-lacquer hover:text-gold">See content work</a>
-          </div>
-        </div>
+      <div class="role-chip relative flex-1 min-w-35 max-w-60 min-h-60 flex flex-col items-center justify-center gap-2.5 px-5 pt-5 pb-5 rounded border border-hairline bg-[linear-gradient(135deg,rgba(255,255,255,.05)_0%,transparent_35%),linear-gradient(160deg,#181510_0%,#100d09_60%,#0a0806_100%)] shadow-[0_4px_12px_rgba(240,179,28,.1)] transition-transform duration-200 hover:-translate-y-1 before:content-[''] before:absolute before:inset-1.75 before:rounded-xs before:border before:border-crimson/25 before:pointer-events-none max-[620px]:w-56 max-[620px]:max-w-70 max-[620px]:flex-none">
+        <ChipBerry />
+        <span class="font-display text-base tracking-wider text-gold">Content Creator</span>
+        <p class="font-mono text-[.72rem] tracking-[.06em] text-ink-dim leading-[1.6] text-center">Kino Royale Podcast · <br/>The Cinefile Blog · Content Production</p>
+        <a href="#work-all" data-work-filter="content" class="mt-1 font-mono text-[.7rem] tracking-widest uppercase text-gold border border-gold/40 px-3.5 py-1.5 rounded-xs transition-[background,color] duration-200 hover:bg-gold hover:text-lacquer">See content work</a>
       </div>
     </div>
   </header>
@@ -432,13 +408,6 @@ const craftColumns = [
   );
   document.querySelectorAll('.rise').forEach(el => io.observe(el));
 
-  // Flip cards: tap to toggle on touch devices
-  document.querySelectorAll('.role-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      chip.classList.toggle('flipped');
-    });
-  });
-
   // All Work filter: pills + hero-chip shortcuts both drive the same grid
   const pills = document.querySelectorAll<HTMLButtonElement>('.work-filter-pill');
   const cards = document.querySelectorAll<HTMLElement>('#work-all-grid [data-roles]');
@@ -522,33 +491,16 @@ const craftColumns = [
     animation: bloom .4s ease forwards 1.7s;
   }
 
-  /* ── Flip cards: hover/tap toggles the 3D rotation ─────────────────────── */
-  .chip-inner {
-    transition: transform .55s cubic-bezier(.4,0,.2,1);
-  }
-  .role-chip:hover .chip-inner,
-  .role-chip:focus-within .chip-inner,
-  .role-chip.flipped .chip-inner {
-    transform: rotateY(180deg);
-  }
-
   /* Cross-component override: icons render at a fixed height inside the chip */
-  .chip-front :global(.spoons),
-  .chip-front :global(.chip-icon) {
+  .role-chip :global(.spoons),
+  .role-chip :global(.chip-icon) {
     height: 88px;
     width: auto;
     margin-bottom: 0;
   }
 
-  /* Tap hint: touch-only devices, hidden on hover-capable screens */
-  .chip-tap { display: none; }
-  @media (hover: none) {
-    .chip-tap { display: block; }
-    .role-chip.flipped .chip-tap { display: none; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .chip-inner { transition: none; }
+    .role-chip { transition: none; }
   }
 
   /* ── Work filter pills ──────────────────────────────────────────────── */
